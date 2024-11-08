@@ -1,12 +1,13 @@
 //import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SurveyBuilder from "./SurveyBuilder";
 import { ISurvey } from "./models";
 import { FunctionComponent, useEffect, useState } from "react";
 import React from 'react';
 
 const CreateSurvey: FunctionComponent = () => {
-    //const location = useLocation();
-    const location = ''
+    const location = useLocation();
+    //const location = ''
     const [emptySurvey, setSurvey] = useState<ISurvey>({
         key: Math.random(),
         name : '', 
