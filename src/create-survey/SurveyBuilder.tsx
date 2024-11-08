@@ -88,7 +88,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                     setIsLoading(false);
                     let responseText = await response.text();
                     
-                    if(responseText == null || responseText == ''){
+                    if(responseText === null || responseText === ''){
                         responseText = 'Failed to save survey';
                     }
 
@@ -121,7 +121,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                     setIsLoading(false);
                     let responseText = await response.text();
                     
-                    if(responseText != null && responseText != ''){
+                    if(responseText !== null && responseText !== ''){
                         errorMessage = responseText;
                     }
 
@@ -133,7 +133,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                 setupDialogueBox(true, 'Success', 'Survey updated!', false);
                 survey.changesMade = false;
             } catch(error: any) {
-                if(error.message != null && error.message != ''){
+                if(error.message !== null && error.message !== ''){
                     errorMessage = error.message
                 }
                 
@@ -144,11 +144,11 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
     }
 
     const onYesClick = async () => {
-        if(yesDialogueAction == 'deleteSurvey'){
+        if(yesDialogueAction === 'deleteSurvey'){
             confirmDelete();
 
             return;
-        } else if(yesDialogueAction == 'exitSurvey'){
+        } else if(yesDialogueAction === 'exitSurvey'){
             const newSurveyKey = Math.random();
             const newQuestionKey = Math.random();
 
@@ -189,7 +189,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
             if(!response.ok) {
                 let responseText = await response.text();
                 
-                if(responseText != null && responseText != ''){
+                if(responseText !== null && responseText !== ''){
                     errorMessage = responseText;
                 }
 

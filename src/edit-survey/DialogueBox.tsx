@@ -11,7 +11,7 @@ const DeleteSurvey : FunctionComponent<IDialogueBox> = ({show, title, message, c
     const onOkClicked = () => {
         close();
 
-        if(onOkNavigationRoute != null && onOkNavigationRoute != '') {
+        if(onOkNavigationRoute !== null && onOkNavigationRoute !== '') {
             console.log('on ok of dialogue clicked. Navigating to ' + onOkNavigationRoute);
 
             navigate(onOkNavigationRoute, { replace: true});

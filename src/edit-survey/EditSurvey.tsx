@@ -1,9 +1,8 @@
 import SurveyBuilder from "../create-survey/SurveyBuilder";
 import { ISurvey } from "../create-survey/models";
 import { FunctionComponent, useState, useCallback, useEffect } from "react";
-import { Link, useNavigate, useParams} from "react-router-dom";
+import { Link, useParams} from "react-router-dom";
 import NotFound from "../home/NotFound";
-import React from 'react';
 
 const EditSurvey: FunctionComponent = () => {
 
@@ -65,7 +64,7 @@ const EditSurvey: FunctionComponent = () => {
             <h2>{surveyToEdit?.name}</h2>
             <br></br>
             {isLoading && <p>Loading...</p>}
-            {surveyToEdit != null && <SurveyBuilder initialSurveyValue={surveyToEdit}/>}
+            {surveyToEdit !== null && surveyToEdit !== undefined && <SurveyBuilder initialSurveyValue={surveyToEdit}/>}
             {!isLoading && error &&
                 <div>
                 <p>{'Something went wrong trying to get the survey you wanted to edit.'}</p>
