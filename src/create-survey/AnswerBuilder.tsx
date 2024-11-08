@@ -1,7 +1,6 @@
 import { ChangeEvent, FunctionComponent, useState } from "react";
 import { IMultipleChoiceOption } from "./models";
 import Button from 'react-bootstrap/Button';
-//import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 
 
