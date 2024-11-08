@@ -200,7 +200,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
 
             setupDialogueBox(true, 'Success', 'Survey deleted.', false, '/');
         } catch(error: any) {
-            if(error.message != null && error.message != ''){
+            if(error.message !== null && error.message !== ''){
                 errorMessage = error.message
             }
             
