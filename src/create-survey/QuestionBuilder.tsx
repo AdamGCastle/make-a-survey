@@ -37,7 +37,12 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
 
     const multipleChoiceChanged = (isMultipleChoice: boolean) => {
         const copyOfMyQuestion = { ...myQuestion, isMultipleChoice };
-    
+        
+        if(isMultipleChoice && copyOfMyQuestion.multipleChoiceOptions.length == 0){
+            const newKey = Math.random();
+            copyOfMyQuestion.multipleChoiceOptions.push({key: newKey, text: '', id: newKey});
+        }
+
         setQuestion(copyOfMyQuestion);
         onQuestionUpdated(copyOfMyQuestion);
     };
