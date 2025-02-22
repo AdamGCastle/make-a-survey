@@ -10,7 +10,7 @@ const EditSelect: FunctionComponent = () => {
 
     const [surveys, setSurveys] = useState<ISurvey[]>([{name: '', id: 0, questions: [], key: 0, changesMade: false }])
     const [isLoading, setIsLoading] = useState(false);
-    const [fiveSecondsPassed, setFiveSecondsPassed] = useState(false);
+    const [fiveSecondsPassed, setFiveSecondsPassed] = useState(true);
     const [fifteenSecondsPassed, setFifteenSecondsPassed] = useState(false);
     // const [showDbReactivationMessage, setShowDbReactivationMessage] = useState(false);  
     // const [showDbReactivationMessage2, setShowDbReactivationMessage2] = useState(false);  

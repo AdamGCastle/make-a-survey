@@ -143,11 +143,10 @@
 
 .title-card {
   color: rgb(33,45,67) !important;
-  border-color: darkgrey; /* Change only the border color */
-  display: inline-block; /* Ensures the card only takes necessary space */
-  width: auto; /* Fits content */
-  max-width: fit-content; /* Ensures it doesn't stretch */
-  white-space: nowrap; /* Prevents wrapping */
+  border-color: darkgrey;
+  display: inline-block; 
+  width: auto; 
+  max-width: fit-content; 
   justify-self: center;
   background-color: rgba(255,255,255, 0.9) !important;
 
