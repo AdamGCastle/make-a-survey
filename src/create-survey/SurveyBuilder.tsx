@@ -259,7 +259,6 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                             <div className="col fw-bold m-2"><h4>Survey Name</h4></div>
                         </div>
                         <div className="row justify-content-center">
-                            <div className="col col-8"> 
                             <div className="col col-11 col-sm-10 col-md-9 col-lg-8"> 
                                 <input placeholder="Enter the name of your survey" className="text-input text-center" type="text" onChange={surveyNameChanged} value={survey.name}></input>
                             </div>
