@@ -260,6 +260,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                         </div>
                         <div className="row justify-content-center">
                             <div className="col col-8"> 
+                            <div className="col col-11 col-sm-10 col-md-9 col-lg-8"> 
                                 <input placeholder="Enter the name of your survey" className="text-input text-center" type="text" onChange={surveyNameChanged} value={survey.name}></input>
                             </div>
                         </div>
@@ -279,7 +280,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                         </div>
                         <br/>
                         <div className="alignCentre">
-                            <button className="btn custom-light-blue-btn btn-lg me-3" onClick={() => submitSurvey()}>Save</button>
+                            <button className="btn custom-dark-blue-btn btn-lg me-3" onClick={() => submitSurvey()}>Save</button>
                             <button className="btn btn-danger btn-lg" onClick={() => onDeleteClicked()}>Delete</button>
                             <DialogueBox
                                 show={dialogueBox.show}

@@ -94,8 +94,8 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                         <Button variant="danger" className="btn btn-md btn-delete" onClick={() => removeQuestion(questionNumber)}> <i className="bi bi-trash"></i></Button>  
                     </div>
                 </div>
-                <div className="row m-3 justify-content-center">    
-                    <div className="col col-xl-8">
+                <div className="row my-3 justify-content-center">    
+                    <div className="col col-sm-11">
                     <input 
                         type="text" 
                         placeholder="Enter question" 
@@ -123,7 +123,7 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                 </div>
 
                 { myQuestion.isMultipleChoice && (
-                    <div id="multipleChoiceDiv" className="answer-builder">
+                    <div id="multipleChoiceDiv" className="card">
                             {
                                 myQuestion.multipleChoiceOptions.map((a, index) => (                        
                                     <AnswerBuilder
@@ -138,33 +138,37 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                         <div className="row justify-content-center">
                             <div className="col">
                                 <button 
-                                    className="btn custom-green-btn btn-sm my-2"
+                                    //  className="btn custom-green-btn btn-sm my-2 px-5" //use if add answer button is text not icon
+                                     className="btn custom-green-btn btn-sm my-2 bi bi-plus-lg"
                                     style={{display: myQuestion.multipleChoiceOptions.length >= 26 ? "none" : "inline-block"}}
                                     onClick={() => addAnswer()}
                                 >
-                                    Add Answer
+                                 {/* Add Answer    */}
                                 </button>
-                            </div>
-                            
+                            </div>                            
                         </div>
-                        <div className="row fw-bold text-center mt-2">
+                        <div className="row text-center mt-3">
                             <div className="col">
-                                Let user pick...
+                                <span className="text-dark-blue">Let user pick...</span>
                             </div>
                         </div>
-                        <div className="btn-group mt-3" role="group">
-                            <button
-                                type="button"
-                                className={`btn ${myQuestion.multipleAnswersPermitted ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
-                                onClick={() => multAnsPermittedChanged(true)}
-                                >Many
-                            </button>
-                            <button
-                                type="button"
-                                className={`btn ${!myQuestion.multipleAnswersPermitted ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
-                                onClick={() => multAnsPermittedChanged(false)}
-                                >Only one
-                            </button>
+                        <div className="row">
+                            <div className="col">
+                                <div className="btn-group mt-3 w-75" role="group">
+                                    <button
+                                        type="button"
+                                        className={`btn ${!myQuestion.multipleAnswersPermitted ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
+                                        onClick={() => multAnsPermittedChanged(false)}
+                                        >Only one
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className={`btn ${myQuestion.multipleAnswersPermitted ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
+                                        onClick={() => multAnsPermittedChanged(true)}
+                                        >Many
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )}           

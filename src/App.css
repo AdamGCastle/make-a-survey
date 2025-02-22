@@ -1,12 +1,5 @@
 .App {
   text-align: center;
-  /* background-color: cadetblue; */
-   /* background-color: white; */
-  /* background: url('../public/assets/tim-arterbury-hsztMXLuC6s-unsplash.webp') ; */
-   /* background-image: url('/public/assets/takeASurveyBackground.jpeg') ; /*no-repeat center center fixed; */
-   /* background-attachment: fixed;
-   background-repeat: no-repeat;  */
-
 }
 
 .App-logo {
@@ -31,14 +24,17 @@
   color: white;
 }
 
+.text-dark-blue{
+  color: rgb(33,45,67) !important;
+}
+
 .survey-builder{
   border-style: solid;
   border-radius: 1em;
   border-color:lightgrey;
   border-width: 1px;    
-  padding: 1em;  
-   /* background-color:#F4f2ee; */
-  background-color: rgb(244,242,238, 0.6);
+  padding: 1em;
+  background-color: rgb(238,242,244, 0.85);
 }
 
 .question-builder{
@@ -47,18 +43,13 @@
   border-color:darkgrey;
   border-width: 1px;    
   padding: 1em;  
-  background-color:rgb(251,250,247, 0.8);
+  background-color:rgb(247,250,251, 0.7)
 }
 
 #multipleChoiceDiv{
-  border-style: solid;
-  border-radius: 1em;
-  border-color:darkgrey;
-  /* border-color: rgb(96,133,166); */
-  border-width: 1px;    
-  padding: 1em;  
-  /* background-color:#FDFCFB; */
-  background-color: rgb(255,251,247,0.6);  
+  border-width: 0px;     
+  padding-top: 1em;
+   background-color:rgb(251,250,247, 0) !important; 
 
 }
 
@@ -66,18 +57,22 @@
   display: none;
 }
 
-.mc-selected{
-  border-bottom-right-radius: 0% !important;
-}
-
-.tr-not-selected{
-  border-bottom: 0 !important;
-  border-bottom-left-radius: 0 !important;
-}
-
 @media (min-width: 576px) {
+  .question-builder{
+    padding: 2rem;
+  }
+
+  .answer-row{
+    padding-inline:2em;
+  }
+
   .answer-letter{
-    display:inline-flex;
+    display:inline;
+    padding:0 !important;
+  }
+
+  .delete-ans{
+    padding:0 !important;
   }
 }
 
@@ -86,7 +81,7 @@
 }
 
 .main {
-  /* background-color: cadetblue;   */
+  color: rgb(33,45,67) !important;
   min-height: 100vh;
   word-wrap: break-word;
   background-image: 
@@ -127,7 +122,7 @@
   color: rgb(119,150,179) !important;
 }
 
-.custom-light-blue-btn{
+.custom-dark-blue-btn{
   background-color: rgb(33,45,67) !important;
   color: white !important;
 }
@@ -147,7 +142,7 @@
 }
 
 .title-card {
-
+  color: rgb(33,45,67) !important;
   border-color: darkgrey; /* Change only the border color */
   display: inline-block; /* Ensures the card only takes necessary space */
   width: auto; /* Fits content */
@@ -172,12 +167,6 @@
   .question-builder {
     width: 90%;
     justify-self: center;    
-  }
-
-  #multipleChoiceDiv{
-    width: 85%;
-    justify-self: center;
-    margin-bottom: 1em;
   }
 }
 

@@ -34,22 +34,22 @@ const AnswerBuilder: FunctionComponent<AnswerBuilderProps> = ({ answerNumber, on
     }
 
     return (        
-        <div className="row mt-3 mb-2">
-            <div className="col col-2 answer-letter">
+        <div className="row mt-3 mb-2 answer-row">
+            <div className="col col-2 col-sm-1 answer-letter text-center">
                 <span className="text-sm fw-bold">{answerLetter})</span>
             </div>
-            <div className="col col-12 col-sm-8">
+            <div className="col col-12 col-sm-10">
                 <input 
                     type="text" 
                     placeholder="Enter answer" 
-                    className="text-input text-sm text-center" 
+                    className="text-input text-sm text-center mb-2" 
                     id={'a' + answerNumber} 
                     value = {myAnswer.text} 
                     onChange={answerTextChanged} 
                 />
             </div>
-            <div className="col col-12 col-sm-2">
-                <button className="btn btn-sm btn-danger bi bi-trash mt-1" 
+            <div className="col col-12 col-sm-1 delete-ans">
+                <button className="btn btn-sm btn-danger bi bi-trash" 
                     onClick={() => removeAnswer(myAnswer.id)}></button>
             </div>
         </div>
