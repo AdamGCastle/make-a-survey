@@ -10,9 +10,7 @@ import CreateSurvey from './create-survey/CreateSurvey';
 import EditSurvey from './edit-survey/EditSurvey';
 import NotFound from './home/NotFound';
 import EditSelect from './home/EditSelect';
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 
 export default function App() {
   return (   
