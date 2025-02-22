@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, FunctionComponent } from "react";
 import {Link } from 'react-router-dom';
 //import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { IQuestion, ISurvey } from "../create-survey/models";
 import React from 'react';
 
@@ -65,33 +65,28 @@ const EditSelect: FunctionComponent = () => {
         let timeoutId5: NodeJS.Timeout;
         let timeoutId15: NodeJS.Timeout;
     
-        // Start timeouts when `isLoading` is true
         if (isLoading) {
-            // Timeout for 5 seconds
             timeoutId5 = setTimeout(() => {
                 if (isLoading) {
-                    setFiveSecondsPassed(true); // Update state if still loading
+                    setFiveSecondsPassed(true);
                 }
             }, 5000);
     
-            // Timeout for 15 seconds
             timeoutId15 = setTimeout(() => {
                 if (isLoading) {
-                    setFifteenSecondsPassed(true); // Update state if still loading
+                    setFifteenSecondsPassed(true);
                 }
             }, 15000);
-        } else {
-            // Reset flags when `isLoading` is false
+        } else {            
             setFiveSecondsPassed(false);
             setFifteenSecondsPassed(false);
         }
     
-        // Cleanup the timeouts when component unmounts or `isLoading` changes
         return () => {
             clearTimeout(timeoutId5);
             clearTimeout(timeoutId15);
         };
-    }, [isLoading]); // Reacts when `isLoading` changes
+    }, [isLoading]);
 
     useEffect(() => {
         getSurveys()
@@ -100,7 +95,7 @@ const EditSelect: FunctionComponent = () => {
 
     return (
         <div>
-                        <div className="card title-card mb-3 p-2">
+            <div className="card title-card mb-3 p-2">
                 <h4 className="p-3 mb">Edit an existing survey</h4>  
                 <div className="m-3">
                     {!isLoading && surveys.length > 0 && surveys[0].id !== 0 && surveys.map(s => 
@@ -109,7 +104,7 @@ const EditSelect: FunctionComponent = () => {
                                 <Row>
                                     <Col>
                                         <Link to={`/editsurvey/${s.id}`}>
-                                            <Button variant="success">{s.name}</Button>
+                                            <button className="btn custom-blue-btn">{s.name}</button>
                                         </Link>
                                     </Col>
                                 </Row>

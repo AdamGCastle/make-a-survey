@@ -276,11 +276,11 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                         }
                         <br/>
                         <div className="alignCentre">                     
-                        <button className="btn btn-sm btn-success addRemoveButton text-center" onClick={() => addQuestion()}>Add Question</button>                    
+                        <button className="btn btn-sm custom-green-btn addRemoveButton text-center" onClick={() => addQuestion()}>Add Question</button>                    
                         </div>
                         <br/>
                         <div className="alignCentre">
-                            <button className="btn btn-primary btn-lg me-3" onClick={() => submitSurvey()}>Save</button>
+                            <button className="btn custom-light-blue-btn btn-lg me-3" onClick={() => submitSurvey()}>Save</button>
                             <button className="btn btn-danger btn-lg" onClick={() => onDeleteClicked()}>Delete</button>
                             <DialogueBox
                                 show={dialogueBox.show}

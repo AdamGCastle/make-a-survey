@@ -92,6 +92,37 @@
   
 }
 
+.custom-green-btn{
+  background-color:rgb(61,141,92) !important;
+  color: white !important;
+}
+
+.custom-green-btn:hover{
+  background-color: rgb(46,105,68) !important;
+}
+
+.custom-blue-btn{
+  background-color: rgb(96,133,166) !important;
+  color: white !important;
+}
+
+.outline-custom-blue-btn{
+  border-color: rgb(96,133,166) !important;
+  color: rgb(119,150,179) !important;
+}
+
+.custom-light-blue-btn{
+  background-color: rgb(34,199,227, 0.9) !important;
+}
+
+.custom-blue-btn:hover{
+  background-color: rgb(63,89,112) !important;
+}
+
+.custom-light-blue-btn:hover{
+  background-color: rgb(18,171,184) !important;
+}
+
 .editSelect{
   margin-left: auto;
   margin-right: auto;

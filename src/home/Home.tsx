@@ -15,7 +15,7 @@ const Home = () => {
             <div className="card title-card mb-3 p-3">
               <h1 className="">Make a survey</h1>
             </div>
-              <button className="btn btn-md btn-primary mb-3" onClick={makeANewSurveyClicked}>
+              <button className="btn btn-md custom-green-btn mb-3" onClick={makeANewSurveyClicked}>
                 Create New
               </button>
           </div>

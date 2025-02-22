@@ -39,7 +39,7 @@ const CreateSurvey: FunctionComponent = () => {
     
     return (
         <div>
-            <div className="alignCentre">
+            <div className="card title-card alignCentre p-3">
                 <h1 >Make a Survey</h1>
             </div>
             <br/>

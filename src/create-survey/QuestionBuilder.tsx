@@ -106,13 +106,13 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                 <div className="btn-group" role="group">
                     <button
                         type="button"
-                        className={`btn ${!myQuestion.isMultipleChoice ? "btn-primary" : "btn-outline-primary"} btn-sm`}
+                        className={`btn ${!myQuestion.isMultipleChoice ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
                         onClick={() => multipleChoiceChanged(false)}
                         > Text Response
                     </button>
                     <button
                         type="button"
-                        className={`btn ${myQuestion.isMultipleChoice ? "btn-primary" : "btn-outline-primary"} btn-sm`}
+                        className={`btn ${myQuestion.isMultipleChoice ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
                         onClick={() => multipleChoiceChanged(true)}
                         >Multiple Choice
                     </button>
@@ -133,15 +133,13 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                             }
                         <div className="row justify-content-center">
                             <div className="col">
-                                <Button 
-                                    className=" btn-sm my-2" 
-                                    variant="success" 
-                                    size="sm"
+                                <button 
+                                    className="btn custom-green-btn btn-sm my-2"
                                     style={{display: myQuestion.multipleChoiceOptions.length >= 26 ? "none" : "inline-block"}}
                                     onClick={() => addAnswer()}
                                 >
                                     Add Answer
-                                </Button>
+                                </button>
                             </div>
                             
                         </div>
@@ -153,13 +151,13 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                             <div className="btn-group mt-3" role="group">
                                 <button
                                     type="button"
-                                    className={`btn ${myQuestion.multipleAnswersPermitted ? "btn-primary" : "btn-outline-primary"} btn-sm`}
+                                    className={`btn ${myQuestion.multipleAnswersPermitted ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
                                     onClick={() => multAnsPermittedChanged(true)}
                                     >Many
                                 </button>
                                 <button
                                     type="button"
-                                    className={`btn ${!myQuestion.multipleAnswersPermitted ? "btn-primary" : "btn-outline-primary"} btn-sm`}
+                                    className={`btn ${!myQuestion.multipleAnswersPermitted ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
                                     onClick={() => multAnsPermittedChanged(false)}
                                     >Only one
                                 </button>
