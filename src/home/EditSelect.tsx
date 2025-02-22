@@ -9,7 +9,11 @@ import React from 'react';
 const EditSelect: FunctionComponent = () => {
 
     const [surveys, setSurveys] = useState<ISurvey[]>([{name: '', id: 0, questions: [], key: 0, changesMade: false }])
-    const [isLoading, setIsLoading] = useState(false);  
+    const [isLoading, setIsLoading] = useState(false);
+    const [fiveSecondsPassed, setFiveSecondsPassed] = useState(false);
+    const [fifteenSecondsPassed, setFifteenSecondsPassed] = useState(false);
+    // const [showDbReactivationMessage, setShowDbReactivationMessage] = useState(false);  
+    // const [showDbReactivationMessage2, setShowDbReactivationMessage2] = useState(false);  
     const [error, setError] = useState('');
     const baseUrl = process.env.REACT_APP_PORTFOLIO_WEB_API_BASE_URL;
 
@@ -58,40 +62,69 @@ const EditSelect: FunctionComponent = () => {
     }, [baseUrl]);
 
     useEffect(() => {
+        let timeoutId5: NodeJS.Timeout;
+        let timeoutId15: NodeJS.Timeout;
+    
+        // Start timeouts when `isLoading` is true
+        if (isLoading) {
+            // Timeout for 5 seconds
+            timeoutId5 = setTimeout(() => {
+                if (isLoading) {
+                    setFiveSecondsPassed(true); // Update state if still loading
+                }
+            }, 5000);
+    
+            // Timeout for 15 seconds
+            timeoutId15 = setTimeout(() => {
+                if (isLoading) {
+                    setFifteenSecondsPassed(true); // Update state if still loading
+                }
+            }, 15000);
+        } else {
+            // Reset flags when `isLoading` is false
+            setFiveSecondsPassed(false);
+            setFifteenSecondsPassed(false);
+        }
+    
+        // Cleanup the timeouts when component unmounts or `isLoading` changes
+        return () => {
+            clearTimeout(timeoutId5);
+            clearTimeout(timeoutId15);
+        };
+    }, [isLoading]); // Reacts when `isLoading` changes
+
+    useEffect(() => {
         getSurveys()
+
     }, [getSurveys]);
 
     return (
         <div>
-            <h4>Edit an existing survey</h4> 
-            <br/> 
-            <div>
-                {!isLoading && surveys.length > 0 && surveys[0].id !== 0 && surveys.map(s => 
-                    <div key={s.key}>
-                        <Container>
-                            <Row>
-                                <Col>
-                                </Col>
-                                <Col>
-                                {s.name}
-                                </Col>
-                                <Col>
-                                    <Link to={`/editsurvey/${s.id}`}>
-                                        <Button variant="secondary">Edit</Button>
-                                    </Link>
-                                </Col>
-                                <Col>
-                                </Col>
-                            </Row>
-                        </Container>                        
-                        <br/>                        
-                    </div>
-                )}
-                
-                {!isLoading && surveys.length === 0 && <p>There aren't any surveys yet.</p>}
-                {isLoading && <p>Loading...</p>}
-                {!isLoading && error.trim() !== '' && <p>{`Something went wrong trying to get a list of surveys. ${error}`}</p>}
-            </div>
+                        <div className="card title-card mb-3 p-2">
+                <h4 className="p-3 mb">Edit an existing survey</h4>  
+                <div className="m-3">
+                    {!isLoading && surveys.length > 0 && surveys[0].id !== 0 && surveys.map(s => 
+                        <div key={s.key}>
+                            <Container>
+                                <Row>
+                                    <Col>
+                                        <Link to={`/editsurvey/${s.id}`}>
+                                            <Button variant="success">{s.name}</Button>
+                                        </Link>
+                                    </Col>
+                                </Row>
+                            </Container>                        
+                            <br/>                        
+                        </div>
+                    )}
+                    
+                    {!isLoading && surveys.length === 0 && <p>There aren't any surveys yet.</p>}
+                    {isLoading && <p>Loading...</p>}
+                    {isLoading && fiveSecondsPassed && <p className="text-secondary">Database in sleep mode. Please allow up to 60 seconds to reactivate...</p>}
+                    {isLoading && fifteenSecondsPassed && <p className="text-secondary">Thank you for your patience. This is a cost-saving measure as database hosting is very expensive.</p>}
+                    {!isLoading && error.trim() !== '' && <p>{`Something went wrong trying to get a list of surveys. ${error}`}</p>}
+                </div>            
+            </div>  
         </div>
     )
 }

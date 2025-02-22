@@ -1,7 +1,5 @@
-import {Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import EditSelect from './EditSelect';
-import { Button } from 'react-bootstrap';
 
 const Home = () => {  
   const navigate = useNavigate();
@@ -11,23 +9,19 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <div className="alignCentre">    
-        <h1>Welcome to MakeASurvey</h1>
-        <br></br>
-        <Link to="https://white-sea-00426ad03.5.azurestaticapps.net/">
-          <Button variant="primary" size="lg">Take an existing Survey</Button>
-        </Link> 
-        <br/>
-        <br/>
-        <button className="btn btn-lg btn-primary" onClick={makeANewSurveyClicked}>
-          Make a New Survey
-        </button>
-        <br/>
-        <br/>
+      <div className="alignCentre">
+        <div className="row">
+          <div className="col">
+            <div className="card title-card mb-3 p-3">
+              <h1 className="">Make a survey</h1>
+            </div>
+              <button className="btn btn-md btn-primary mb-3" onClick={makeANewSurveyClicked}>
+                Create New
+              </button>
+          </div>
+        </div>
         <EditSelect />  
       </div> 
-    </div>   
   );
 };
 

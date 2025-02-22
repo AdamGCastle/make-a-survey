@@ -248,58 +248,62 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
     }
 
     useEffect(() => {
-        console.log('Survey has been updated to:', survey);
     }, [survey]);
     
     return (        
         <div>
             {!isLoading && <div>
-                <div >
-                    <div className="row">
-                        <div className="col-2">         
-                            <label className="me-2 fw-bold">Name:  </label>
+                <div className="survey-builder row text-center justify-content-center m-2">
+                    <div className="col col-xl-10">
+                        <div className="row justify-content-center">
+                            <div className="col fw-bold m-2"><h4>Survey Name</h4></div>
                         </div>
-                        <div className="col"> 
-                            <input placeholder="Enter the name of your survey" className="text-input" type="text" onChange={surveyNameChanged} value={survey.name}></input>
+                        <div className="row justify-content-center">
+                            <div className="col col-8"> 
+                                <input placeholder="Enter the name of your survey" className="text-input text-center" type="text" onChange={surveyNameChanged} value={survey.name}></input>
+                            </div>
                         </div>
-                    </div>
-                    <br/>
-                    {
-                        survey.questions.map((q, index) => (
-                            <QuestionBuilder
-                                key={q.key}
-                                questionNumber={index+1}
-                                onQuestionUpdated={(question: IQuestion) => onQuestionUpdated(question, index)}
-                                removeQuestion={() => removeQuestion(index)}
-                                initialQuestionValue={q}
+                        {
+                            survey.questions.map((q, index) => (
+                                <QuestionBuilder
+                                    key={q.key}
+                                    questionNumber={index+1}
+                                    onQuestionUpdated={(question: IQuestion) => onQuestionUpdated(question, index)}
+                                    removeQuestion={() => removeQuestion(index)}
+                                    initialQuestionValue={q}
+                                />
+                            ))
+                        }
+                        <br/>
+                        <div className="alignCentre">                     
+                        <button className="btn btn-sm btn-success addRemoveButton text-center" onClick={() => addQuestion()}>Add Question</button>                    
+                        </div>
+                        <br/>
+                        <div className="alignCentre">
+                            <button className="btn btn-primary btn-lg me-3" onClick={() => submitSurvey()}>Save</button>
+                            <button className="btn btn-danger btn-lg" onClick={() => onDeleteClicked()}>Delete</button>
+                            <DialogueBox
+                                show={dialogueBox.show}
+                                title={dialogueBox.title}
+                                confirm={onYesClick}
+                                close={closeDialogueBox}
+                                message={dialogueBox.message}
+                                isQuestion={dialogueBox.isQuestion}
+                                onOkNavigationRoute={dialogueBox.onOkNavigationRoute}
                             />
-                        ))
-                    }
-                    <br/>
-                    <div className="alignCentre">                     
-                    <button className="btn btn-sm btn-success addRemoveButton text-center" onClick={() => addQuestion()}>Add Question</button>                    
-                    </div>
-                    <br/>
-                    <br/>             
-                </div>  
-                <div className="alignCentre">
-                    <button className="btn btn-primary btn-sm me-3" onClick={() => submitSurvey()}>Save</button>
-                    <button className="btn btn-danger btn-sm" onClick={() => onDeleteClicked()}>Delete Survey</button>
-                    <DialogueBox
-                        show={dialogueBox.show}
-                        title={dialogueBox.title}
-                        confirm={onYesClick}
-                        close={closeDialogueBox}
-                        message={dialogueBox.message}
-                        isQuestion={dialogueBox.isQuestion}
-                        onOkNavigationRoute={dialogueBox.onOkNavigationRoute}
-                    />
-                </div>
+                        </div>  
+                    </div>                         
+                </div>                  
             </div>}
             {isLoading &&<div>
                 <p>Loading...</p>
             </div>}
-            <button onClick={onBackClicked} className='btn btn-secondary btn-sm me-3'>Back</button>      
+            <div className="d-flex justify-content-center">
+                <button onClick={onBackClicked} className='btn btn-light btn-sm mt-3 me-3'>Back</button>  
+            </div>
+            
+              
+                
         </div>        
     )
 }

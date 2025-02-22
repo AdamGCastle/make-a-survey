@@ -1,6 +1,12 @@
 .App {
   text-align: center;
-  background-color: cadetblue;
+  /* background-color: cadetblue; */
+   /* background-color: white; */
+  /* background: url('../public/assets/tim-arterbury-hsztMXLuC6s-unsplash.webp') ; */
+   /* background-image: url('/public/assets/takeASurveyBackground.jpeg') ; /*no-repeat center center fixed; */
+   /* background-attachment: fixed;
+   background-repeat: no-repeat;  */
+
 }
 
 .App-logo {
@@ -25,12 +31,42 @@
   color: white;
 }
 
-.questionBox{
+.survey-builder{
+  border-style: solid;
+  border-radius: 1em;
+  border-color:lightgrey;
+  border-width: 1px;    
+  padding: 1em;  
+   /* background-color:#F4f2ee; */
+  background-color: rgb(244,242,238, 0.6);
+}
+
+.question-builder{
   border-style: solid;
   border-radius: 1em;
   border-color:darkgrey;
   border-width: 1px;    
   padding: 1em;  
+  background-color:rgb(251,250,247, 0.8);
+}
+
+#multipleChoiceDiv{
+  border-style: solid;
+  border-radius: 1em;
+  border-color:darkgrey;
+  border-width: 1px;    
+  padding: 1em;  
+  background-color:#FDFCFB;  
+}
+
+.answer-letter{
+  display: none;
+}
+
+@media (min-width: 576px) {
+  .answer-letter{
+    display:inline-flex;
+  }
 }
 
 .App-link {
@@ -38,9 +74,12 @@
 }
 
 .main {
-  background-color: cadetblue;  
+  /* background-color: cadetblue;   */
   min-height: 100vh;
   word-wrap: break-word;
+  background-image: url('/public/assets/tim-arterbury-hsztMXLuC6s-unsplash.webp') ;
+  background-size: cover;
+  background-position: center;
 }
 
 .nav {
@@ -57,18 +96,47 @@
   margin-left: auto;
   margin-right: auto;
   min-width: 50em;  
-  
 }
 
-.card {
-  margin: 2%;
-  padding: 5%;
+.title-card {
+
+  border-color: darkgrey; /* Change only the border color */
+  display: inline-block; /* Ensures the card only takes necessary space */
+  width: auto; /* Fits content */
+  max-width: fit-content; /* Ensures it doesn't stretch */
+  white-space: nowrap; /* Prevents wrapping */
+  justify-self: center;
+  opacity: 0.95
+
+}
+
+.surrounding-card {
+  background-color: rgba(255,255,255, 0) !important;
+  padding: 20px
+}
+
+@media (min-width: 768px) {
+  .surrounding-card {
+    width:85%;
+    justify-self: center;
+  }
+
+  .question-builder {
+    width: 90%;
+    justify-self: center;    
+  }
+
+  #multipleChoiceDiv{
+    width: 85%;
+    justify-self: center;
+    margin-bottom: 1em;
+  }
 }
 
 @media (min-width: 1024px) {
-  .card {
-    margin: 2% 20%; /* For large screens */
-    padding: 2% 10%;
+  .surrounding-card {
+    width:70%;
+    justify-self: center;
   }
 }
 
@@ -92,6 +160,22 @@
 
 .button:hover{
   cursor: pointer;
+}
+
+.btn-primary{
+  opacity: 0.85;
+}
+
+.btn-delete{
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between icon and text */
+  border-radius: 4px;
 }
 
 #createButton {

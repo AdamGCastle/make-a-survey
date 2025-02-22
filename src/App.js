@@ -2,6 +2,7 @@ import './App.css';
 import { Routes, Route, Outlet} from "react-router-dom";
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 //import Home from '@components/home';
 import Home from './home/Home';
 
@@ -32,24 +33,21 @@ export default function App() {
 function Layout() {
   return (
     <div className='main'>
-      <Navbar bg="light" className='justify-content-center'>
-        <Navbar.Brand>
-          {/* <Nav.Link href="https://adamcastleprojects.azurewebsites.net/">Adam Castle CV</Nav.Link> */}
-        </Navbar.Brand>    
+      <Navbar bg="light" className='justify-content-center'>  
         <Nav>
-          <NavDropdown title="Projects">
+          {/* <NavDropdown title="Projects">
             <NavDropdown.Item href="https://adamcastleprojects.azurewebsites.net/">All projects</NavDropdown.Item>
             <NavDropdown.Item href="https://takeasurvey.azurewebsites.net/">TakeASurvey</NavDropdown.Item>
             <NavDropdown.Item href="https://castlelibrary.azurewebsites.net/">CastleLibrary</NavDropdown.Item>
             <NavDropdown.Item href="https://teacheradmin.azurewebsites.net/">TeacherAdmin</NavDropdown.Item>
-          </NavDropdown>
+          </NavDropdown> */}
           <Nav.Link href="/">Home</Nav.Link>
           {/* <Nav.Link href="/createsurvey">New survey</Nav.Link>   */}
         </Nav>
       </Navbar>      
-      <main className='main'>  
-      <div className="card"> 
-        <Outlet/> 
+      <main className='justify-content-center'>
+        <div className="surrounding-card mt-3">
+            <Outlet/> 
         </div>
       </main>          
     </div>

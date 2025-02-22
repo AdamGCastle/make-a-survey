@@ -61,8 +61,8 @@ const EditSurvey: FunctionComponent = () => {
     
     return (
         <div>
-            <h2>{surveyToEdit?.name}</h2>
-            <br></br>
+            <h2 className="text-center card title-card px-5 py-3">Edit survey</h2>
+            <br/>
             {isLoading && <p>Loading...</p>}
             {surveyToEdit !== null && surveyToEdit !== undefined && <SurveyBuilder initialSurveyValue={surveyToEdit}/>}
             {!isLoading && error &&
