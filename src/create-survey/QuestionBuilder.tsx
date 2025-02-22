@@ -35,18 +35,6 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
         onQuestionUpdated(copyOfMyQuestion);
     }
 
-    const checkboxChanged = (e: ChangeEvent<HTMLInputElement>, checkboxName: string) => {
-        const copyOfMyQuestion = { ...myQuestion };
-        if(checkboxName === 'isMultipleChoice') {
-            copyOfMyQuestion.isMultipleChoice = e.target.checked;
-        } else if (checkboxName === 'multipleAnswersPermitted') {
-            copyOfMyQuestion.multipleAnswersPermitted = e.target.checked;
-        }
-
-        setQuestion(copyOfMyQuestion);
-        onQuestionUpdated(copyOfMyQuestion);
-    };
-
     const multipleChoiceChanged = (isMultipleChoice: boolean) => {
         const copyOfMyQuestion = { ...myQuestion, isMultipleChoice };
     
