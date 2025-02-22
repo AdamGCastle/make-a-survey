@@ -105,26 +105,25 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                         value={myQuestion.text}
                         key={'q' + questionNumber}
                     />      
-                    </div>              
-                    
+                    </div>
                 </div>     
                 <div className="btn-group" role="group">
                     <button
                         type="button"
-                        className={`btn ${!myQuestion.isMultipleChoice ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
+                        className={`btn ${!myQuestion.isMultipleChoice ? "custom-blue-btn" : "outline-custom-blue-btn tr-not-selected"} btn-sm`}
                         onClick={() => multipleChoiceChanged(false)}
                         > Text Response
                     </button>
                     <button
                         type="button"
-                        className={`btn ${myQuestion.isMultipleChoice ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
+                        className={`btn ${myQuestion.isMultipleChoice ? "custom-blue-btn mc-selected" : "outline-custom-blue-btn"} btn-sm`}
                         onClick={() => multipleChoiceChanged(true)}
                         >Multiple Choice
                     </button>
                 </div>
 
                 { myQuestion.isMultipleChoice && (
-                    <div id="multipleChoiceDiv" className="answer-builder mt-3">
+                    <div id="multipleChoiceDiv" className="answer-builder">
                             {
                                 myQuestion.multipleChoiceOptions.map((a, index) => (                        
                                     <AnswerBuilder
@@ -153,20 +152,20 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                                 Let user pick...
                             </div>
                         </div>
-                            <div className="btn-group mt-3" role="group">
-                                <button
-                                    type="button"
-                                    className={`btn ${myQuestion.multipleAnswersPermitted ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
-                                    onClick={() => multAnsPermittedChanged(true)}
-                                    >Many
-                                </button>
-                                <button
-                                    type="button"
-                                    className={`btn ${!myQuestion.multipleAnswersPermitted ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
-                                    onClick={() => multAnsPermittedChanged(false)}
-                                    >Only one
-                                </button>
-                            </div>
+                        <div className="btn-group mt-3" role="group">
+                            <button
+                                type="button"
+                                className={`btn ${myQuestion.multipleAnswersPermitted ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
+                                onClick={() => multAnsPermittedChanged(true)}
+                                >Many
+                            </button>
+                            <button
+                                type="button"
+                                className={`btn ${!myQuestion.multipleAnswersPermitted ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm`}
+                                onClick={() => multAnsPermittedChanged(false)}
+                                >Only one
+                            </button>
+                        </div>
                     </div>
                 )}           
             </div>            

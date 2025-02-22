@@ -54,13 +54,25 @@
   border-style: solid;
   border-radius: 1em;
   border-color:darkgrey;
+  /* border-color: rgb(96,133,166); */
   border-width: 1px;    
   padding: 1em;  
-  background-color:#FDFCFB;  
+  /* background-color:#FDFCFB; */
+  background-color: rgb(255,251,247,0.6);  
+
 }
 
 .answer-letter{
   display: none;
+}
+
+.mc-selected{
+  border-bottom-right-radius: 0% !important;
+}
+
+.tr-not-selected{
+  border-bottom: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 
 @media (min-width: 576px) {
@@ -77,9 +89,13 @@
   /* background-color: cadetblue;   */
   min-height: 100vh;
   word-wrap: break-word;
-  background-image: url('/public/assets/tim-arterbury-hsztMXLuC6s-unsplash.webp') ;
+  background-image: 
+  /* linear-gradient( to bottom, rgba(255, 255, 255, 1) 0%, rgba(255,255,255,0) 70%), */
+    url('/public/assets/tim-arterbury-hsztMXLuC6s-unsplash.webp') ;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
+  overflow-y:auto;
 }
 
 .nav {
@@ -112,7 +128,8 @@
 }
 
 .custom-light-blue-btn{
-  background-color: rgb(34,199,227, 0.9) !important;
+  background-color: rgb(33,45,67) !important;
+  color: white !important;
 }
 
 .custom-blue-btn:hover{
@@ -120,7 +137,7 @@
 }
 
 .custom-light-blue-btn:hover{
-  background-color: rgb(18,171,184) !important;
+  background-color: rgb(100,128,179)  !important;
 }
 
 .editSelect{
@@ -137,7 +154,7 @@
   max-width: fit-content; /* Ensures it doesn't stretch */
   white-space: nowrap; /* Prevents wrapping */
   justify-self: center;
-  opacity: 0.95
+  background-color: rgba(255,255,255, 0.9) !important;
 
 }
 

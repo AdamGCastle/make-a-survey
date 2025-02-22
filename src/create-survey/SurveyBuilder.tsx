@@ -274,9 +274,8 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                                 />
                             ))
                         }
-                        <br/>
                         <div className="alignCentre">                     
-                        <button className="btn btn-sm custom-green-btn addRemoveButton text-center" onClick={() => addQuestion()}>Add Question</button>                    
+                        <button className="btn btn-sm custom-green-btn addRemoveButton text-center mt-3" onClick={() => addQuestion()}>Add Question</button>                    
                         </div>
                         <br/>
                         <div className="alignCentre">
@@ -301,9 +300,6 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
             <div className="d-flex justify-content-center">
                 <button onClick={onBackClicked} className='btn btn-light btn-sm mt-3 me-3'>Back</button>  
             </div>
-            
-              
-                
         </div>        
     )
 }
