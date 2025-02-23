@@ -73,6 +73,10 @@
   .delete-ans{
     padding:0 !important;
   }
+
+  .save-delete-survey-btn {
+    width: 25%;
+  }
 }
 
 .App-link {

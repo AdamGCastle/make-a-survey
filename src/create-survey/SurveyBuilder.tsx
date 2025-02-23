@@ -250,6 +250,8 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
     useEffect(() => {
     }, [survey]);
     
+    console.log(initialSurveyValue);
+
     return (        
         <div>
             {!isLoading && <div>
@@ -279,8 +281,8 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                         </div>
                         <br/>
                         <div className="alignCentre mb-2">
-                            <button className="btn custom-dark-blue-btn btn-lg me-3" onClick={() => submitSurvey()}>Save</button>
-                            <button className="btn btn-danger btn-lg" onClick={() => onDeleteClicked()}>Delete</button>
+                            <button className="btn custom-dark-blue-btn btn-lg mx-3 save-delete-survey-btn" onClick={() => submitSurvey()}>Save</button>
+                            {survey.id > 0 && <button className="btn btn-danger btn-lg mx-3 save-delete-survey-btn" onClick={() => onDeleteClicked()}>Delete</button>}
                             <DialogueBox
                                 show={dialogueBox.show}
                                 title={dialogueBox.title}
@@ -298,7 +300,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                 <p>Loading...</p>
             </div>}
             <div className="d-flex justify-content-center">
-                <button onClick={onBackClicked} className='btn btn-light btn-sm mt-3 me-3'>Back</button>  
+                <button onClick={onBackClicked} className='btn btn-light btn-sm my-3 w-25'>Back</button>  
             </div>
         </div>        
     )
