@@ -24,7 +24,7 @@ const DeleteSurvey : FunctionComponent<IDialogueBox> = ({show, title, message, c
 
     else {
         return(
-            <div className="overlay">
+            <div className="overlay p-2">
                 <div className="dialog">
                     <div className="dialog__content">
                         <h2 className="dialog__title">{title}</h2>

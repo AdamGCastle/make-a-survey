@@ -95,7 +95,7 @@ const EditSelect: FunctionComponent = () => {
 
     return (
         <div>
-            <div className="card title-card mb-3 p-2">
+            <div className="card title-card mb-3 mx-3">
                 <h4 className="p-3 mb">Edit an existing survey</h4>  
                 <div className="m-3">
                     {!isLoading && surveys.length > 0 && surveys[0].id !== 0 && surveys.map(s => 
@@ -116,6 +116,7 @@ const EditSelect: FunctionComponent = () => {
                     {!isLoading && surveys.length === 0 && <p>There aren't any surveys yet.</p>}
                     {isLoading && <p>Loading...</p>}
                     {isLoading && fiveSecondsPassed && <p className="text-secondary">Database in sleep mode. Please allow up to 60 seconds to reactivate...</p>}
+                    {/* <p className="text-secondary">Database in sleep mode. Please allow up to 60 seconds to reactivate...</p> */}
                     {isLoading && fifteenSecondsPassed && <p className="text-secondary">Thank you for your patience. This is a cost-saving measure as database hosting is very expensive.</p>}
                     {!isLoading && error.trim() !== '' && <p>{`Something went wrong trying to get a list of surveys. ${error}`}</p>}
                 </div>            

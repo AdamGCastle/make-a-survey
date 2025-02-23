@@ -32,8 +32,7 @@
   border-style: solid;
   border-radius: 1em;
   border-color:lightgrey;
-  border-width: 1px;    
-  padding: 1em;
+  border-width: 1px;
   background-color: rgb(238,242,244, 0.85);
 }
 
@@ -154,10 +153,14 @@
 
 .surrounding-card {
   background-color: rgba(255,255,255, 0) !important;
-  padding: 20px
 }
 
 @media (min-width: 768px) {
+  .title-card{
+    padding-left: 2em;
+    padding-right:2em;
+  }
+
   .surrounding-card {
     width:85%;
     justify-self: center;
@@ -166,6 +169,10 @@
   .question-builder {
     width: 90%;
     justify-self: center;    
+  }
+
+  .survey-builder {    
+    padding: 1em;
   }
 }
 
