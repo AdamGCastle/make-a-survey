@@ -24,6 +24,19 @@
   color: white;
 }
 
+a {
+  text-decoration: none !important; 
+  color: #014fa3 !important;
+  transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
+  border-bottom: 2px solid transparent; /* Adds a hover effect */
+  padding-bottom: 2px;
+}
+
+a:hover {
+    color: #0056b3; /* A darker blue on hover */
+    border-bottom: 2px solid #0056b3; /* Adds a modern underline effect */
+}
+
 .text-dark-blue{
   color: rgb(33,45,67) !important;
 }
@@ -147,9 +160,7 @@
 .title-card {
   color: rgb(33,45,67) !important;
   border-color: darkgrey;
-  display: inline-block; 
-  width: auto; 
-  max-width: fit-content; 
+  display: inline-block;
   justify-self: center;
   background-color: rgba(255,255,255, 0.9) !important;
 

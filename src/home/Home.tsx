@@ -10,18 +10,33 @@ const Home = () => {
 
   return (
       <div className="alignCentre">
-        <div className="row">
-          <div className="col">
-            <div className="card title-card mb-3 p-3">
-              <h1 className="">Make a survey</h1>
+        <div className="row justify-content-center">
+          <div className="col col-sm-8 col-md-6 mx-2">
+            <div className="card title-card mb-3 p-3 w-100">
+              <h1>Make a survey</h1>
             </div>
-              <button className="btn btn-md custom-green-btn mb-3" onClick={makeANewSurveyClicked}>
+              <button className="btn btn-md custom-green-btn mb-3 px-5" onClick={makeANewSurveyClicked}>
                 Create New
               </button>
           </div>
         </div>
-        <EditSelect />  
-      </div> 
+        {/* <div className="row justify-content-center">
+          <div className="col col-sm-8 col-md-6"> */}
+            <EditSelect />
+            {/* </div>
+        </div> */}
+        <div className="row justify-content-center">
+          <div className="col col-sm-8 col-md-6 mx-2">
+            <div className="card title-card mb-3 p-2 w-100">
+              <h4 className="p-3 fw-normal">
+                <a href="https://takeasurvey.acprojects.ip-ddns.com/" target="_blank" rel="noopener noreferrer">
+                  Take an existing survey
+                </a>
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
   );
 };
 

@@ -94,9 +94,10 @@ const EditSelect: FunctionComponent = () => {
     }, [getSurveys]);
 
     return (
-        <div>
-            <div className="card title-card mb-3 mx-3">
-                <h4 className="p-3 mb">Edit an existing survey</h4>  
+        <div className="row justify-content-center">
+          <div className="col col-sm-8 col-md-6 mx-2">
+            <div className="card title-card mb-3 mx-3 w-100">
+                <h4 className="p-3">Edit an existing survey</h4>  
                 <div className="m-3">
                     {!isLoading && surveys.length > 0 && surveys[0].id !== 0 && surveys.map(s => 
                         <div key={s.key}>
@@ -120,8 +121,9 @@ const EditSelect: FunctionComponent = () => {
                     {isLoading && fifteenSecondsPassed && <p className="text-secondary">Thank you for your patience. This is a cost-saving measure as database hosting is very expensive.</p>}
                     {!isLoading && error.trim() !== '' && <p>{`Something went wrong trying to get a list of surveys. ${error}`}</p>}
                 </div>            
-            </div>  
-        </div>
+            </div>
+        </div>            
+    </div>        
     )
 }
 
