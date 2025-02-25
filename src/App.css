@@ -120,7 +120,7 @@ a:hover {
 }
 
 .custom-green-btn{
-  background-color:rgb(61,141,92) !important;
+  background-color:rgb(61,141,92, 0.9) !important;
   color: white !important;
 }
 

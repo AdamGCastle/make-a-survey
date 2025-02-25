@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, FunctionComponent } from "react";
 import {Link } from 'react-router-dom';
 //import 'bootstrap/dist/css/bootstrap.min.css';
-import { Col, Container, Row } from "react-bootstrap";
+import { Container} from "react-bootstrap";
 import { IQuestion, ISurvey } from "../create-survey/models";
 import React from 'react';
 
@@ -102,13 +102,13 @@ const EditSelect: FunctionComponent = () => {
                     {!isLoading && surveys.length > 0 && surveys[0].id !== 0 && surveys.map(s => 
                         <div key={s.key}>
                             <Container>
-                                <Row>
-                                    <Col>
+                                <div className="row justify-content-center">
+                                    <div className="col col-10 col-xl-8">
                                         <Link to={`/editsurvey/${s.id}`}>
-                                            <button className="btn custom-blue-btn">{s.name}</button>
+                                            <button className="btn custom-blue-btn w-100">{s.name}</button>
                                         </Link>
-                                    </Col>
-                                </Row>
+                                    </div>
+                                </div>
                             </Container>                        
                             <br/>                        
                         </div>
@@ -118,8 +118,8 @@ const EditSelect: FunctionComponent = () => {
                     {isLoading && <p>Loading...</p>}
                     {isLoading && fiveSecondsPassed && <p className="text-secondary">Database in sleep mode. Please allow up to 60 seconds to reactivate...</p>}
                     {/* <p className="text-secondary">Database in sleep mode. Please allow up to 60 seconds to reactivate...</p> */}
-                    {isLoading && fifteenSecondsPassed && <p className="text-secondary">Thank you for your patience. This is a cost-saving measure as database hosting is very expensive.</p>}
-                    {!isLoading && error.trim() !== '' && <p>{`Something went wrong trying to get a list of surveys. ${error}`}</p>}
+                    {isLoading && fifteenSecondsPassed && <p className="text-secondary">Thank you for your patience. Database hosting is very expensive, and we implement a sleep mode when not in use to keep costs within this project's budget.</p>}
+                    {!isLoading && error.trim() !== '' && <p>{`Something went wrong trying to get a list of surveys. Please refresh the page.${error}`}</p>}
                 </div>            
             </div>
         </div>            
