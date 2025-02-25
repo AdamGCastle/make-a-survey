@@ -33,7 +33,8 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
     const [survey, setSurvey] = useState<ISurvey>(initialSurveyValue);    
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const [yesDialogueAction, setYesDialogueAction] = useState(''); 
+    const [yesDialogueAction, setYesDialogueAction] = useState('');
+    const [questionNumToDelete, setQuestionNumToDelete] = useState(0); 
     const [dialogueBox, setDialogueBox] = useState<IDialogueBox>(defaultDialogueBoxValue);
     const baseUrl = process.env.REACT_APP_PORTFOLIO_WEB_API_BASE_URL;
     
@@ -49,6 +50,22 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
         const newKey = Math.random();
         copyOfSurvey.questions.push({key: newKey, id: newKey, text: '', multipleChoiceOptions: [], isMultipleChoice: false, multipleAnswersPermitted: false});
         setSurvey(copyOfSurvey);
+    }
+
+    const onRemoveQuestionClicked = (questionNum: number) => {
+
+        const question : IQuestion = survey.questions[questionNum];        
+        const confirmWithUser: boolean = question.text.trim() !== '' || question.multipleChoiceOptions.some(x => x.text.trim() !== '');
+
+        if(confirmWithUser){
+            setQuestionNumToDelete(questionNum);
+            setYesDialogueAction('removeQuestion');
+            setupDialogueBox(true, 'Delete Question', 'Are you sure you delete this question?', true);
+            
+            return;            
+        }       
+        
+        removeQuestion(questionNum);
     }
 
     const removeQuestion = (questionNum: number) => {
@@ -173,6 +190,9 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
             initialSurveyValue.id = 0;
 
             navigate('/');
+        } else if (yesDialogueAction === 'removeQuestion'){
+            removeQuestion(questionNumToDelete);
+            closeDialogueBox();
         }
     }
 
@@ -249,8 +269,6 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
 
     useEffect(() => {
     }, [survey]);
-    
-    console.log(initialSurveyValue);
 
     return (        
         <div>
@@ -271,7 +289,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                                     key={q.key}
                                     questionNumber={index+1}
                                     onQuestionUpdated={(question: IQuestion) => onQuestionUpdated(question, index)}
-                                    removeQuestion={() => removeQuestion(index)}
+                                    onRemoveQuestionClicked={() => onRemoveQuestionClicked(index)}
                                     initialQuestionValue={q}
                                 />
                             ))

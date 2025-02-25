@@ -10,21 +10,21 @@ interface IQuestionUpdatedFunction{
     (updatedQuestion: IQuestion): void
 }
 
-interface IRemoveQuestionFunction{
+interface IRemoveQuestionClickedFunction{
      (questionNum: number): void
 }
 
 interface QuestionBuilderProps{
     questionNumber: number,
     onQuestionUpdated: IQuestionUpdatedFunction
-    removeQuestion : IRemoveQuestionFunction 
+    onRemoveQuestionClicked : IRemoveQuestionClickedFunction 
     initialQuestionValue: IQuestion
 }
 
 //props down (prop drilling)
 //events up
 
-const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumber, onQuestionUpdated, removeQuestion, initialQuestionValue}) => {
+const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumber, onQuestionUpdated, onRemoveQuestionClicked, initialQuestionValue}) => {
 
     const [myQuestion, setQuestion] = useState<IQuestion>(initialQuestionValue);
     const questionTextChanged = (elem: ChangeEvent<HTMLInputElement>) => {        
@@ -91,7 +91,7 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                         <h5>Question {questionNumber}</h5> 
                     </div>
                     <div className="col-3">
-                        <Button variant="danger" className="btn btn-md btn-delete" onClick={() => removeQuestion(questionNumber)}> <i className="bi bi-trash"></i></Button>  
+                        <Button variant="danger" className="btn btn-md btn-delete" onClick={() => onRemoveQuestionClicked(questionNumber)}> <i className="bi bi-trash"></i></Button>  
                     </div>
                 </div>
                 <div className="row my-3 justify-content-center">    
@@ -106,21 +106,25 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                         key={'q' + questionNumber}
                     />      
                     </div>
-                </div>     
-                <div className="btn-group" role="group">
-                    <button
-                        type="button"
-                        className={`btn ${!myQuestion.isMultipleChoice ? "custom-blue-btn" : "outline-custom-blue-btn tr-not-selected"} btn-sm`}
-                        onClick={() => multipleChoiceChanged(false)}
-                        > Text Response
-                    </button>
-                    <button
-                        type="button"
-                        className={`btn ${myQuestion.isMultipleChoice ? "custom-blue-btn mc-selected" : "outline-custom-blue-btn"} btn-sm`}
-                        onClick={() => multipleChoiceChanged(true)}
-                        >Multiple Choice
-                    </button>
                 </div>
+                <div className="row mt-3 justify-content-center">
+                    <div className="col col-sm-11 col-md-9 col-xxl-7">
+                        <div className="btn-group w-100" role="group">
+                            <button
+                                type="button"
+                                className={`btn ${!myQuestion.isMultipleChoice ? "custom-blue-btn blue-btn-selected" : "outline-custom-blue-btn tr-not-selected"} btn-sm`}
+                                onClick={() => multipleChoiceChanged(false)}
+                                > Text Response
+                            </button>
+                            <button
+                                type="button"
+                                className={`btn ${myQuestion.isMultipleChoice ? "custom-blue-btn blue-btn-selected" : "outline-custom-blue-btn"} btn-sm`}
+                                onClick={() => multipleChoiceChanged(true)}
+                                >Multiple Choice
+                            </button>
+                        </div>
+                    </div>
+                </div>                
 
                 { myQuestion.isMultipleChoice && (
                     <div id="multipleChoiceDiv" className="card">
@@ -152,18 +156,18 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                                 <span className="text-dark-blue">Let user pick...</span>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col">
-                                <div className="btn-group mt-3 w-75" role="group">
+                        <div className="row justify-content-center">
+                            <div className="col col-sm-11 col-md-9 col-xxl-7">
+                                <div className="btn-group mt-3 w-100" role="group">
                                     <button
                                         type="button"
-                                        className={`btn ${!myQuestion.multipleAnswersPermitted ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm w-50`}
+                                        className={`btn ${!myQuestion.multipleAnswersPermitted ? "custom-blue-btn blue-btn-selected" : "outline-custom-blue-btn"} btn-sm w-50`}
                                         onClick={() => multAnsPermittedChanged(false)}
                                         >Only one
                                     </button>
                                     <button
                                         type="button"
-                                        className={`btn ${myQuestion.multipleAnswersPermitted ? "custom-blue-btn" : "outline-custom-blue-btn"} btn-sm w-50`}
+                                        className={`btn ${myQuestion.multipleAnswersPermitted ? "custom-blue-btn blue-btn-selected" : "outline-custom-blue-btn"} btn-sm w-50`}
                                         onClick={() => multAnsPermittedChanged(true)}
                                         >Many
                                     </button>

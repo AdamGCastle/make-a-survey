@@ -20,7 +20,6 @@ const EditSurvey: FunctionComponent = () => {
         try{
             setIsLoading(true);
             const response = await fetch(`${baseUrl}/Surveys/ReadById?id=${id}`);
-            console.log('response: ', response);
             if(!response.ok) {
                 throw new Error("Couldn't connect to the database.")
             }
@@ -61,7 +60,14 @@ const EditSurvey: FunctionComponent = () => {
     
     return (
         <div>
-            <h2 className="text-center card title-card px-5 py-3">Edit survey</h2>
+            <div className="row justify-content-center">
+          <div className="col col-sm-8 col-md-6 mx-2">
+            <div className="card title-card mb-3 p-3 w-100 text-center">
+              <h2>Edit survey</h2>
+            </div>             
+          </div>
+        </div>
+            {/* <h2 className="text-center card title-card px-5 py-3"></h2> */}
             <br/>
             {isLoading && <p>Loading...</p>}
             {surveyToEdit !== null && surveyToEdit !== undefined && <SurveyBuilder initialSurveyValue={surveyToEdit}/>}

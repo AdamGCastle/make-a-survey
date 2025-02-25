@@ -143,12 +143,18 @@ a:hover {
   color: white !important;
 }
 
+.custom-dark-blue-btn:hover{
+  background-color: rgb(100,128,179)  !important;
+}
+
 .custom-blue-btn:hover{
   background-color: rgb(63,89,112) !important;
 }
 
-.custom-light-blue-btn:hover{
-  background-color: rgb(100,128,179)  !important;
+
+
+.blue-btn-selected{
+  box-shadow: 3px 3px 10px rgba(33,45,67);
 }
 
 .editSelect{
@@ -196,6 +202,20 @@ a:hover {
     width:70%;
     justify-self: center;
   }
+}
+
+@media (min-width: 1400px) {
+  .answer-row{
+    padding-left: 3em;
+    padding-right: 3em;
+  } 
+}
+
+@media (min-width: 1700px) {
+  .answer-row{
+    padding-left: 4em;
+    padding-right: 4em;
+  } 
 }
 
 .medtextbox{
