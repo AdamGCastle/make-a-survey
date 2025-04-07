@@ -140,7 +140,8 @@ const LogIn: FunctionComponent<LogInProps> = ({ onClose, setRefreshKey}) => {
                         <div className="col">
                              <Link to={'/manageaccount/create'} 
                                 className="link-text"
-                                style={{ cursor: "pointer" }}>
+                                style={{ cursor: "pointer" }}
+                                onClick={onClose}>
                                 Create account
                             </Link>
 
