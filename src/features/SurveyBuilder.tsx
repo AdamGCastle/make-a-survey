@@ -271,7 +271,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
             isQuestion: false,
             onOkNavigationRoute: ''
         });
-    }, [deleteSuccess]);
+    }, [deleteSuccess, deleteError, navigate, showDialogue]);
 
     return (        
         <div>
