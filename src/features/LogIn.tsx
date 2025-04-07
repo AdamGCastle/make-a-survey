@@ -2,6 +2,7 @@ import { ChangeEvent, FunctionComponent, useState } from "react"
 import { IAccountDto } from "./models";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import {Link } from 'react-router-dom';
 
 interface LogInProps {
     onClose: () => void;
@@ -137,7 +138,12 @@ const LogIn: FunctionComponent<LogInProps> = ({ onClose, setRefreshKey}) => {
                     {!isLoading && loginErrorMessage !== '' && <div className="mt-3"><p className="text-danger">{loginErrorMessage}</p></div>}
                     {!isLoading && <div className="row justify-content-center">
                         <div className="col">
-                            <a href="/manageaccount/create" className="link-text" style={{ cursor: "pointer" }}>Create new account</a>
+                             <Link to={'/manageaccount/create'} 
+                                className="link-text"
+                                style={{ cursor: "pointer" }}>
+                                Create account
+                            </Link>
+
                         </div>
                     </div>}
                 </div>
