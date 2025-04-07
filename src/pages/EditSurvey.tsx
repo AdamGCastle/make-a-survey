@@ -1,7 +1,7 @@
 import SurveyBuilder from "../features/SurveyBuilder";
 import { ISurvey } from "../features/models";
 import { FunctionComponent, useState, useCallback, useEffect } from "react";
-import { Link, useParams, useLocation, useSearchParams} from "react-router-dom";
+import { Link, useParams, useSearchParams} from "react-router-dom";
 import NotFound from "./NotFound";
 
 const EditSurvey: FunctionComponent = () => {

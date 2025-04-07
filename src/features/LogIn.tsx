@@ -35,7 +35,7 @@ const LogIn: FunctionComponent<LogInProps> = ({ onClose, setRefreshKey}) => {
     const submitLogIn = async () => {
         const loginDetailsErrors = getLoginDetailsErrors(accountDto);
 
-        if(loginDetailsErrors != ''){
+        if(loginDetailsErrors !== ''){
             setLoginErrorMessage(loginDetailsErrors);
 
             return;
@@ -134,7 +134,7 @@ const LogIn: FunctionComponent<LogInProps> = ({ onClose, setRefreshKey}) => {
                             <span className="visually-hidden">Loading...</span>
                         </div>
                     </div>}
-                    {!isLoading && loginErrorMessage != '' && <div className="mt-3"><p className="text-danger">{loginErrorMessage}</p></div>}
+                    {!isLoading && loginErrorMessage !== '' && <div className="mt-3"><p className="text-danger">{loginErrorMessage}</p></div>}
                     {!isLoading && <div className="row justify-content-center">
                         <div className="col">
                             <a href="/manageaccount/create" className="link-text" style={{ cursor: "pointer" }}>Create new account</a>

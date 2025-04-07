@@ -16,8 +16,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
     const [survey, setSurvey] = useState<ISurvey>(initialSurveyValue);    
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const [questionNumToDelete, setQuestionNumToDelete] = useState(0);
-    const { dialogueBox, showDialogue, closeDialogue } = useDialogue();
+    const { showDialogue } = useDialogue();
     const [deleteSuccess, setDeleteSuccess] = useState<boolean | undefined>(undefined);
     const [deleteError, setDeleteError] = useState<string>('');
     const baseUrl = process.env.REACT_APP_PORTFOLIO_WEB_API_BASE_URL;    
@@ -51,10 +50,9 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
         const confirmWithUser: boolean = question.text.trim() !== '' || question.multipleChoiceOptions.some(x => x.text.trim() !== '');
 
         if(confirmWithUser){
-            setQuestionNumToDelete(questionNum);
             showDialogue({
                 title: 'Delete Question',
-                message: 'Are you sure you delete this question?',
+                message: 'Are you sure want to delete this question?',
                 isQuestion: true,
                 onOkNavigationRoute: '',
                 onConfirm: () => {
@@ -128,7 +126,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
             }
         
             for(const multipleChoiceOption of question.multipleChoiceOptions.filter(x => x.removed)) {
-                const surveyDtoQuestion = surveyDto.questions.find(x => x.id == question.id);
+                const surveyDtoQuestion = surveyDto.questions.find(x => x.id === question.id);
 
                 if(surveyDtoQuestion !== undefined) {
                     surveyDtoQuestion.multipleChoiceOptions.push(multipleChoiceOption);
@@ -246,7 +244,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
     };    
 
     useEffect(() => {
-    }, [survey]);
+    }, [survey, deleteError, showDialogue, navigate]);
 
     useEffect(() => {
         if(typeof deleteSuccess === 'undefined') {
@@ -285,7 +283,13 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                         </div>
                         <div className="row justify-content-center">
                             <div className="col col-11 col-sm-10 col-md-9 col-lg-8"> 
-                                <input placeholder="Enter the name of your survey" className="text-input text-center" type="text" onChange={surveyNameChanged} value={survey.name}></input>
+                                <input 
+                                    placeholder="Enter the name of your survey" 
+                                    className="text-input text-center" 
+                                    type="text" 
+                                    onChange={surveyNameChanged} 
+                                    value={survey.name}
+                                />
                             </div>
                         </div>
                         {

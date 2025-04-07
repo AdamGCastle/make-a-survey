@@ -30,7 +30,7 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
   const [lockEnterToSubmit, setLockEnterToSubmit] = useState(false);  
   const [currentUsername, setCurrentUsername] = useState(user.username);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const {dialogueBox, showDialogue, closeDialogue } = useDialogue();
+  const { showDialogue } = useDialogue();
   const { setUsername } = useAuth();
 
   const [usernameError, setUsernameError] = useState('');
@@ -40,7 +40,7 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
   const baseUrl = process.env.REACT_APP_PORTFOLIO_WEB_API_BASE_URL;
 
   const usernameChanged = (e: ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
+    const { value } = e.target;
 
     setAccountDto(prev => ({
       ...prev,
@@ -143,7 +143,10 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
   
   const handleChangePasswordOk = async () => {
     
-    setPasswordsDontMatch(confirmPassword != accountDto.newPassword);
+    setPasswordsDontMatch(confirmPassword !== accountDto.newPassword);
+    if(accountDto.verifyPassword === '') {
+      setVerifyPasswordError('Please enter your password.');
+    }
 
     if(passwordsDontMatch) {      
       return;
@@ -194,8 +197,9 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
   }
 
   const handleDeleteAccountOk = async () => {
+    console.log(accountDto.verifyPassword );
     if(accountDto.verifyPassword === ''){
-      setVerifyPasswordError('Please enter your password');
+      setVerifyPasswordError('Please enter your password.');
       return;
     }
 
@@ -270,13 +274,13 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
         newPassword: value
       }));
 
-      setPasswordsDontMatch(confirmPassword === '' ? false : value != confirmPassword);
+      setPasswordsDontMatch(confirmPassword === '' ? false : value !== confirmPassword);
 
       return;
     }
 
     setConfirmPassword(value);
-    setPasswordsDontMatch(accountDto.newPassword != value);    
+    setPasswordsDontMatch(accountDto.newPassword !== value);    
   }
 
   const submitAccountRequest = async (): Promise<boolean> => {
@@ -421,7 +425,9 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
                 onChange={passwordFieldChanged}
                 onKeyDown={handleKeyPress}
               />
+              <div className="text-danger mt-2 mb-3">{verifyPasswordError}</div>              
             </div>
+            
           }
           {(isCreateMode || showChangePassword) && 
             <div className="m-2">
@@ -471,7 +477,8 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
               <button 
                 className="btn btn-danger me-2" 
                 onClick={handleDeleteAccountOk}
-                disabled={isLoading || accountDto.verifyPassword === ''}>
+                disabled={isLoading || accountDto.verifyPassword === ''}
+              >
                   Delete account
                   </button>
               <button className="btn btn-outline-secondary"

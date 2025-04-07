@@ -16,6 +16,7 @@ const EditSelect: FunctionComponent = () => {
     const baseUrl = process.env.REACT_APP_PORTFOLIO_WEB_API_BASE_URL;
 
     const getSurveys = useCallback(async () => {
+        let message = 'Something went wrong trying to get a list of surveys. Please refresh the page.';
         try{
             setIsLoading(true);
             const token = localStorage.getItem("jwtToken");
@@ -26,17 +27,13 @@ const EditSelect: FunctionComponent = () => {
                 }
             });
 
-            if(!response.ok) {     
-                console.log(response);           
-                let errorMessage = 'Could not connect to the database.';
-                const contentType = response.headers.get('content-type');
+            if(!response.ok) {                 
+                const errorData = await response.text();
                 
-                if (contentType && contentType.includes('application/json')) {
-                    const errorData = await response.json();
-                    errorMessage = errorData.message || errorMessage;
+                if(errorData !== ''){
+                    setError(`${message} ${errorData}`);                
                 }
-                
-                setError(errorMessage);
+
                 setIsLoading(false);
 
                 return;
@@ -63,8 +60,9 @@ const EditSelect: FunctionComponent = () => {
             setIsLoading(false);
             setError('');
         } catch(error: any) {
-                setError(error.message);
-                setIsLoading(false);
+            console.log(error.message);
+            setError(message);
+            setIsLoading(false);
         }
     }, [baseUrl]);
 
@@ -154,7 +152,7 @@ const EditSelect: FunctionComponent = () => {
                     }
                     {isLoading && fiveSecondsPassed && <p className="text-secondary">Database in sleep mode. Please allow up to 60 seconds to reactivate...</p>}
                     {isLoading && fifteenSecondsPassed && <p className="text-secondary">Thank you for your patience. Database hosting is very expensive, and we implement a sleep mode when not in use to keep costs within this project's budget.</p>}
-                    {!isLoading && error.trim() !== '' && <p>{`Something went wrong trying to get a list of surveys. Please refresh the page. ${error}.`}</p>}
+                    {!isLoading && error.trim() !== '' && <p>{`${error}`}</p>}
                 </div>            
             </div>
         </div>            

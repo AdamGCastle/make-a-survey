@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Navbar, Nav, Dropdown } from "react-bootstrap";
 import LogIn from "../features/LogIn"; 
 import { getUserFromToken } from "../utils/authUtils";
