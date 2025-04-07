@@ -40,7 +40,7 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
         
         if(isMultipleChoice && copyOfMyQuestion.multipleChoiceOptions.length === 0){
             const newKey = Math.random();
-            copyOfMyQuestion.multipleChoiceOptions.push({key: newKey, text: '', id: newKey});
+            copyOfMyQuestion.multipleChoiceOptions.push({key: newKey, text: '', id: newKey, removed: false});
         }
 
         setQuestion(copyOfMyQuestion);
@@ -57,16 +57,15 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
     const addAnswer = () => {        
         const copyOfMyQuestion = {...myQuestion};
         const newKey = Math.random();
-        copyOfMyQuestion.multipleChoiceOptions.push({key: newKey, text: '', id: newKey});
+        copyOfMyQuestion.multipleChoiceOptions.push({key: newKey, text: '', id: newKey, removed: false});
         
         setQuestion(copyOfMyQuestion);
     }
 
-    const removeAnswer = (answerID: number) => {
+    const removeAnswer = (answerId: number) => {
         const copyOfMyQuestion = {...myQuestion};
-        const indexOfAnswer = copyOfMyQuestion.multipleChoiceOptions.findIndex(a => a.id === answerID);
+        const indexOfAnswer = copyOfMyQuestion.multipleChoiceOptions.findIndex(a => a.id === answerId);
         copyOfMyQuestion.multipleChoiceOptions.splice(indexOfAnswer,1);
-        console.log(copyOfMyQuestion);
         
         setQuestion(copyOfMyQuestion);  
         onQuestionUpdated(copyOfMyQuestion); 
@@ -141,13 +140,11 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                             }
                         <div className="row justify-content-center">
                             <div className="col">
-                                <button 
-                                    //  className="btn custom-green-btn btn-sm my-2 px-5" //use if add answer button is text not icon
+                                <button
                                      className="btn custom-green-btn btn-sm my-2 bi bi-plus-lg"
                                     style={{display: myQuestion.multipleChoiceOptions.length >= 26 ? "none" : "inline-block"}}
                                     onClick={() => addAnswer()}
-                                >
-                                 {/* Add Answer    */}
+                                >                                 
                                 </button>
                             </div>                            
                         </div>

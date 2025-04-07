@@ -1,47 +1,33 @@
 import './App.css';
-import { Routes, Route, Outlet} from "react-router-dom";
-import React from 'react';
+import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import Layout from "./components/Layout";
+import Home from "./pages/Home.tsx";
+import CreateSurvey from "./pages/CreateSurvey";
+import EditSurvey from "./pages/EditSurvey";
+import NotFound from "./pages/NotFound";
+import EditSelect from "./features/EditSelect";
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-//import Home from '@components/home';
-import Home from './home/Home';
-
-import CreateSurvey from './create-survey/CreateSurvey';
-import EditSurvey from './edit-survey/EditSurvey';
-import NotFound from './home/NotFound';
-import EditSelect from './home/EditSelect';
-import { Nav, Navbar } from 'react-bootstrap';
+import ManageAccountPage from '../src/pages/ManageAccountPage' ;
+import { AuthProvider } from "./features/AuthContext";
 
 export default function App() {
-  return (   
-    
-          <Routes>
-            <Route path="/" element={<Layout/>}>
-              <Route index element={<Home/>}/>
-              <Route path="/createsurvey/" element={CreateSurvey()} />
-              <Route path="/editsurvey/:id" element={<EditSurvey />}/>
-              <Route path="/editsurveys" element={<EditSelect />}/>
-              <Route path="*" element = {NotFound()} />
-            </Route>
-          </Routes>    
-          
-  );
-}
 
-function Layout() {
+  const [refreshKey, setRefreshKey] = useState(0);
+
   return (
-    <div className='main'>
-      <Navbar bg="light" className='justify-content-center'>  
-        <Nav>
-          <Nav.Link href="/">Home</Nav.Link>
-          {/* <Nav.Link href="/createsurvey">New survey</Nav.Link>   */}
-        </Nav>
-      </Navbar>      
-      <main className='justify-content-center'>
-        <div className="surrounding-card mt-3">
-            <Outlet/> 
-        </div>
-      </main>          
-    </div>
-  )
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Layout setRefreshKey={setRefreshKey} />}>
+          <Route index element={<Home key={refreshKey}/>} />
+          <Route path="/createsurvey" element={<CreateSurvey />} />
+          <Route path="/editsurvey/:id" element={<EditSurvey />} />
+          <Route path="/editsurveys" element={<EditSelect/>} />
+          <Route path="/manageaccount/:mode" element={<ManageAccountPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </AuthProvider>
+  );
 }

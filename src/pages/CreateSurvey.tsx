@@ -1,23 +1,26 @@
 import { useLocation } from "react-router-dom";
-import SurveyBuilder from "./SurveyBuilder";
-import { ISurvey } from "./models";
+import SurveyBuilder from "../features/SurveyBuilder";
+import { ISurvey } from "@/features/models";
 import { FunctionComponent, useEffect, useState } from "react";
 import React from 'react';
 
 const CreateSurvey: FunctionComponent = () => {
     const location = useLocation();
     const [emptySurvey, setSurvey] = useState<ISurvey>({
-        key: Math.random(),
-        name : '', 
-        id: 0,
-        changesMade: false,
-        questions: [{
-            key: Math.random(), 
-            id: Math.random(), 
-            text: '', 
-            multipleChoiceOptions: [], 
-            isMultipleChoice: false, 
-            multipleAnswersPermitted: false}] 
+      key: Math.random(),
+      name : '', 
+      id: 0,
+      changesMade: false,
+      questions: [{
+        key: Math.random(), 
+        id: Math.random(), 
+        text: '', 
+        multipleChoiceOptions: [], 
+        isMultipleChoice: false, 
+        multipleAnswersPermitted: false,
+        removed: false
+      }],
+      createdByAccountId: 0
     });
 
     useEffect(() => {
@@ -32,8 +35,10 @@ const CreateSurvey: FunctionComponent = () => {
             text: '',
             multipleChoiceOptions: [],
             isMultipleChoice: false,
-            multipleAnswersPermitted: false
-          }]
+            multipleAnswersPermitted: false,
+            removed: false
+          }],
+          createdByAccountId: 0
         });
       }, [location]);
     

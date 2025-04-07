@@ -24,18 +24,18 @@
   color: white;
 }
 
-a {
+/* a {
   text-decoration: none !important; 
   color: #014fa3 !important;
   transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
-  border-bottom: 2px solid transparent; /* Adds a hover effect */
+  border-bottom: 2px solid transparent;
   padding-bottom: 2px;
 }
 
 a:hover {
-    color: #0056b3; /* A darker blue on hover */
-    border-bottom: 2px solid #0056b3; /* Adds a modern underline effect */
-}
+    color: #0056b3;
+    border-bottom: 2px solid #0056b3;
+} */
 
 .text-dark-blue{
   color: rgb(33,45,67) !important;
@@ -102,7 +102,7 @@ a:hover {
   word-wrap: break-word;
   background-image: 
   /* linear-gradient( to bottom, rgba(255, 255, 255, 1) 0%, rgba(255,255,255,0) 70%), */
-    url('/public/assets/tim-arterbury-hsztMXLuC6s-unsplash.webp') ;
+    url('/public/assets/deep_blue.jpg') ;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -150,8 +150,6 @@ a:hover {
 .custom-blue-btn:hover{
   background-color: rgb(63,89,112) !important;
 }
-
-
 
 .blue-btn-selected{
   box-shadow: 3px 3px 10px rgba(33,45,67);
@@ -245,7 +243,7 @@ a:hover {
 }
 
 .btn-delete{
-  background-color: red;
+  background-color: red !important;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -254,6 +252,14 @@ a:hover {
   align-items: center;
   gap: 5px; /* Space between icon and text */
   border-radius: 4px;
+}
+
+.navlink-padding {
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+}
+
+.dropdown-menu .dropdown-item {
+  transition: none !important;
 }
 
 #createButton {
@@ -267,6 +273,20 @@ a:hover {
 #editButton{
   float:right;
   margin-right:70%;  
+}
+
+.link-text {
+  all: unset;
+  text-decoration: none !important; 
+  color: #014fa3 !important;
+  transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
+  border-bottom: 2px solid transparent; /* Adds a hover effect */
+}
+
+.link-text:hover {
+    all: unset;
+    color: #0056b3; /* A darker blue on hover */
+    border-bottom: 2px solid #0056b3; /* Adds a modern underline effect */
 }
 
 @keyframes App-logo-spin {
