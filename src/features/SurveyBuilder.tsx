@@ -22,7 +22,11 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
     const baseUrl = process.env.REACT_APP_PORTFOLIO_WEB_API_BASE_URL;    
     const token = localStorage.getItem("jwtToken");
 
-    const surveyNameChanged = (elem: ChangeEvent<HTMLInputElement>) => {        
+    const surveyNameChanged = (elem: ChangeEvent<HTMLTextAreaElement>) => {     
+        const textarea = elem.target;
+        textarea.style.height = "auto"; 
+        textarea.style.height = `${textarea.scrollHeight}px`;
+        
         const value = elem.target.value;
         const copyOfSurvey = {...survey};
         copyOfSurvey.name = value;
@@ -243,10 +247,15 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
         });
     };    
 
-    useEffect(() => {
-    }, [survey, deleteError, showDialogue, navigate]);
+    const resizeTextArea = (textarea: HTMLTextAreaElement) => {
+        textarea.style.height = "auto";
+        textarea.style.height = `${textarea.scrollHeight}px`;
+    };
 
     useEffect(() => {
+        const surveyNameTextArea = document.getElementById(`survey${survey.id}Name`) as HTMLTextAreaElement;
+        resizeTextArea(surveyNameTextArea);
+
         if(typeof deleteSuccess === 'undefined') {
             return;
         }
@@ -271,24 +280,22 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
             isQuestion: false,
             onOkNavigationRoute: ''
         });
-    }, [deleteSuccess, deleteError, navigate, showDialogue]);
+    }, [deleteSuccess, deleteError, navigate, showDialogue, survey.id]);
 
     return (        
         <div>
             {!isLoading && <div>
                 <div className="survey-builder row text-center justify-content-center m-2">
                     <div className="col col-xl-10">
-                        <div className="row justify-content-center">
-                            <div className="col fw-bold m-2"><h4>Survey Name</h4></div>
-                        </div>
-                        <div className="row justify-content-center">
+                        <div className="row justify-content-center mt-3">
                             <div className="col col-11 col-sm-10 col-md-9 col-lg-8"> 
-                                <input 
+                                <textarea 
+                                    id={`survey${survey.id}Name`}
                                     placeholder="Enter the name of your survey" 
-                                    className="text-input text-center" 
-                                    type="text" 
+                                    className="survey-title-textarea text-center text-dark-blue" 
                                     onChange={surveyNameChanged} 
                                     value={survey.name}
+                                    rows={1}
                                 />
                             </div>
                         </div>
@@ -304,12 +311,12 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                             ))
                         }
                         <div className="alignCentre">                     
-                        <button className="btn btn-sm custom-green-btn addRemoveButton text-center mt-3" onClick={() => addQuestion()}>Add Question</button>                    
+                        <button className="btn btn-sm custom-green-btn add-question-btn text-center mt-3" onClick={() => addQuestion()}>Add Question</button>                    
                         </div>
                         <br/>
                         <div className="alignCentre mb-2">
-                            <button className="btn custom-dark-blue-btn btn-lg mx-3 save-delete-survey-btn" onClick={() => submitSurvey()}>Save</button>
-                            {survey.id > 0 && <button className="btn btn-danger btn-lg mx-3 save-delete-survey-btn" onClick={() => onDeleteClicked()}>Delete</button>}
+                            <button className="btn custom-dark-blue-btn btn-sm mx-3 save-delete-survey-btn" onClick={() => submitSurvey()}>Save Survey</button>
+                            {survey.id > 0 && <button className="btn btn-danger btn-sm mx-3 save-delete-survey-btn" onClick={() => onDeleteClicked()}>Delete Survey</button>}
                         </div>  
                     </div>                         
                 </div>                  

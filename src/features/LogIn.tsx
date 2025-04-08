@@ -126,7 +126,7 @@ const LogIn: FunctionComponent<LogInProps> = ({ onClose, setRefreshKey}) => {
                     </div>
                     <div className="row justify-content-center">
                         <div className="col">
-                            <button onClick={submitLogIn} className={`btn btn-sm btn-secondary me-3 mb-3 w-25 ${isLoading ? "disabled" :""}`}>Log in</button>
+                            <button onClick={submitLogIn} className={`btn btn-sm custom-green-btn me-3 mb-3 w-25 ${isLoading ? "disabled" :""}`}>Log in</button>
                             <button onClick={onClose} className={`btn btn-sm btn-secondary me-3 mb-3 w-25 ${isLoading ? "disabled" :""}`}>Cancel</button>
                         </div>
                     </div>

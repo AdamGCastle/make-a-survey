@@ -1,9 +1,8 @@
-import { ChangeEvent, FunctionComponent } from "react";
+import { ChangeEvent, FunctionComponent, useEffect } from "react";
 import { useState } from "react";
 import AnswerBuilder from "./AnswerBuilder"
 import { IQuestion, IMultipleChoiceOption } from "./models";
 import Button from 'react-bootstrap/Button';
-//import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 
 interface IQuestionUpdatedFunction{
@@ -21,16 +20,16 @@ interface QuestionBuilderProps{
     initialQuestionValue: IQuestion
 }
 
-//props down (prop drilling)
-//events up
-
 const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumber, onQuestionUpdated, onRemoveQuestionClicked, initialQuestionValue}) => {
 
     const [myQuestion, setQuestion] = useState<IQuestion>(initialQuestionValue);
-    const questionTextChanged = (elem: ChangeEvent<HTMLInputElement>) => {        
-        const value = elem.target.value;  
+
+    const questionTextChanged = (elem: ChangeEvent<HTMLTextAreaElement>) => {
+        const textarea = elem.target;
         const copyOfMyQuestion = {...myQuestion}; 
-        copyOfMyQuestion.text = value;
+        copyOfMyQuestion.text = textarea.value;
+
+        resizeTextArea(textarea);
         setQuestion(copyOfMyQuestion);
         onQuestionUpdated(copyOfMyQuestion);
     }
@@ -79,33 +78,33 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
         onQuestionUpdated(copyOfNewQuestion);        
     }
 
+    const resizeTextArea = (textarea: HTMLTextAreaElement) => {
+        textarea.style.height = "auto";
+        textarea.style.height = `${textarea.scrollHeight}px`;
+    };
+
+    useEffect(() => {
+        const textarea = document.getElementById(`q${questionNumber}`) as HTMLTextAreaElement;
+        if (textarea) { resizeTextArea(textarea); }
+    }, [questionNumber]);
+
     return (
         <div >
             <br/>
             <div className="question-builder">
-                <div className="row mb-2">
-                    <div className="col-3">
-                    </div>
-                    <div className="col-6">
-                        <h5>Question {questionNumber}</h5> 
-                    </div>
-                    <div className="col-3">
-                        <Button variant="danger" className="btn btn-md btn-delete" onClick={() => onRemoveQuestionClicked(questionNumber)}> <i className="bi bi-trash"></i></Button>  
-                    </div>
-                </div>
                 <div className="row my-3 justify-content-center">    
                     <div className="col col-sm-11">
-                    <input 
-                        type="text" 
+                    <textarea
                         placeholder="Enter question" 
-                        className="text-input font-size-sm text-center mt-2" 
+                        className="text-center question-text-textarea" 
                         id={'q' + questionNumber} 
                         onChange={questionTextChanged} 
                         value={myQuestion.text}
-                        key={'q' + questionNumber}
+                        key={'q' + questionNumber}    
+                        rows={1}                    
                     />      
                     </div>
-                </div>
+                </div>                
                 <div className="row mt-3 justify-content-center">
                     <div className="col col-sm-11 col-md-9 col-xxl-7">
                         <div className="btn-group w-100" role="group">
@@ -138,7 +137,7 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                                     />         
                                 ))
                             }
-                        <div className="row justify-content-center">
+                        <div className="row justify-content-center mb-2">
                             <div className="col">
                                 <button
                                      className="btn custom-green-btn btn-sm my-2 bi bi-plus-lg"
@@ -148,7 +147,7 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                                 </button>
                             </div>                            
                         </div>
-                        <div className="row text-center mt-3">
+                        <div className="row text-center mt-4">
                             <div className="col">
                                 <span className="text-dark-blue">Let user pick...</span>
                             </div>
@@ -172,7 +171,13 @@ const QuestionBuilder: FunctionComponent<QuestionBuilderProps> = ({questionNumbe
                             </div>
                         </div>
                     </div>
-                )}           
+                )}
+
+                <div className="row mt-4 pt-4 justify-content-center">
+                    <div className="col-6">
+                        <Button variant="danger" className="btn btn-sm btn-danger w-75" onClick={() => onRemoveQuestionClicked(questionNumber)}> <i className="bi bi-trash"></i></Button>  
+                    </div>
+                </div>         
             </div>            
         </div>
     )

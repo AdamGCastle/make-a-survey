@@ -53,7 +53,7 @@ interface LayoutProps {
                     <Dropdown.Item onClick={manageAccountClicked}>
                         Manage Account
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                    <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
                 ) : (

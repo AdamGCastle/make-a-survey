@@ -34,7 +34,7 @@ const AnswerBuilder: FunctionComponent<AnswerBuilderProps> = ({ answerNumber, on
     }
 
     return (        
-        <div className="row mt-3 mb-2 answer-row">
+        <div className="row mt-3 mb-2 answer-row align-items-center">
             <div className="col col-2 col-sm-1 answer-letter text-center">
                 <span className="text-sm fw-bold">{answerLetter})</span>
             </div>
@@ -42,7 +42,7 @@ const AnswerBuilder: FunctionComponent<AnswerBuilderProps> = ({ answerNumber, on
                 <input 
                     type="text" 
                     placeholder="Enter answer" 
-                    className="text-input text-sm text-center mb-2" 
+                    className="form-control text-sm text-center" 
                     id={'a' + answerNumber} 
                     value = {myAnswer.text} 
                     onChange={answerTextChanged} 

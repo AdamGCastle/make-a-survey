@@ -351,8 +351,9 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
 
           {!isCreateMode &&
             <div>
-              <div className="m-2">
-                <strong>{`${showChangeUsername ? "Old username" : "Username"}:`}</strong> {currentUsername}  
+              <div className="mb-2">
+                <span>{`${showChangeUsername ? "Old username" : "Username"}:`}</span>
+                <p className="fw-bold">{currentUsername}</p>
               </div>
               {!showChangeUsername && !showChangePassword && !isDeleteAccount && <div className="d-grid gap-2 mb-3 mt-3">
                 <button
@@ -389,7 +390,7 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
           }
 
           {(isCreateMode || showChangeUsername) && 
-            <div className="m-2">
+            <div className="mb-2">
               <label htmlFor="username" className="form-label">{`${isCreateMode ? "U" : "New u"}sername: `}</label>
               <input
                 type="text"
@@ -413,7 +414,7 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
           }
 
           {(showChangePassword || isDeleteAccount) && 
-            <div className="mb-2">
+            <div className="">
               <label 
                 htmlFor="verifyPassword" 
                 className="form-label">{isDeleteAccount ? 'Enter your password to delete your account:' : showChangePassword ? "Old password:" : "Password:"}
@@ -430,7 +431,7 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
             
           }
           {(isCreateMode || showChangePassword) && 
-            <div className="m-2">
+            <div className="mb-2">
               <div className="mb-3">
                 <label htmlFor="newPassword" className="form-label">{`${isCreateMode ? "P" : "New p"}assword: `}</label>
                 <input
@@ -491,7 +492,7 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
 
           {isCreateMode && (
             <button 
-              className="btn btn-primary" 
+              className="btn custom-blue-btn" 
               onClick={handleCreateAccountClicked} 
               disabled={isLoading || passwordsDontMatch || accountDto.username === '' || confirmPassword === ''}>
                 Create account
