@@ -444,7 +444,7 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
               </div>
               <div className="text-danger mt-2 mb-3">{newPasswordError}</div>              
               <div className={passwordsDontMatch ? "mb-3" : "mb-4"}>
-                <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+                <label htmlFor="confirmPassword" className="form-label">Confirm Password: </label>
                 <input
                   type="password"
                   className="form-control text-center"

@@ -34,7 +34,8 @@ const EditSurvey: FunctionComponent = () => {
                 key: data.id,
                 questions: data.questions,
                 changesMade: false,
-                createdByAccountId: data.createdByAccountId             
+                createdByAccountId: data.createdByAccountId,
+                published: data.published            
             };
 
             for (const question of survey.questions) {
@@ -76,13 +77,12 @@ const EditSurvey: FunctionComponent = () => {
                 <div className="row justify-content-center">
                     <div className="col col-sm-8 col-md-6 d-flex justify-content-center mx-2">
                         <div className="card p-3 w-100 d-inline-block text-center">
-                            <div className="row">
+                            <div className="row mb-3">
                                 <div className="col">
-                                 <p >Loading</p>
                                  <h3><strong>{surveyName}</strong></h3>
                                 </div >
                             </div>
-                            <div className="row">
+                            <div className="row mb-3">
                                 <div className="col d-flex justify-content-center">
                                     <div className="spinner-border text-primary" role="status">                                
                                     </div>

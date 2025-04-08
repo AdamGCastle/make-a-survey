@@ -20,7 +20,8 @@ const CreateSurvey: FunctionComponent = () => {
         multipleAnswersPermitted: false,
         removed: false
       }],
-      createdByAccountId: 0
+      createdByAccountId: 0,
+      published: false
     });
 
     useEffect(() => {
@@ -38,7 +39,8 @@ const CreateSurvey: FunctionComponent = () => {
             multipleAnswersPermitted: false,
             removed: false
           }],
-          createdByAccountId: 0
+          createdByAccountId: 0,
+          published: false
         });
       }, [location]);
     

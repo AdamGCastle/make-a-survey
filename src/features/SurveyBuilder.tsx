@@ -247,6 +247,11 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
         });
     };    
 
+    const publishStatusChanged = (published: boolean) => {
+        const copyOfSurvey = {...survey, published};
+        setSurvey(copyOfSurvey);
+    }
+
     const resizeTextArea = (textarea: HTMLTextAreaElement) => {
         textarea.style.height = "auto";
         textarea.style.height = `${textarea.scrollHeight}px`;
@@ -311,7 +316,32 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                             ))
                         }
                         <div className="alignCentre">                     
-                        <button className="btn btn-sm custom-green-btn add-question-btn text-center mt-3" onClick={() => addQuestion()}>Add Question</button>                    
+                            <button className="btn btn-sm custom-green-btn add-question-btn text-center mt-3" onClick={() => addQuestion()}>Add Question</button>                    
+                        </div>
+                        <div className="question-builder mt-4">
+                            <div className="row justify-content-center">
+                                <div className="col">
+                                    <span className="text-dark-blue fw-bold">Is this survey ready for users to take?</span>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center mt-3">
+                                <div className="col">
+                                <div className="btn-group mt-3 w-50" role="group">
+                                        <button
+                                            type="button"
+                                            className={`btn ${survey.published ? "custom-blue-btn blue-btn-selected" : "outline-custom-blue-btn"} btn-sm w-50`}
+                                            onClick={() => publishStatusChanged(true)}
+                                            >Yes
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className={`btn ${!survey.published ? "custom-blue-btn blue-btn-selected" : "outline-custom-blue-btn"} btn-sm w-50`}
+                                            onClick={() => publishStatusChanged(false)}
+                                            >No
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <br/>
                         <div className="alignCentre mb-2">

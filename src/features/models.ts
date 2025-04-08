@@ -5,6 +5,7 @@ export interface ISurvey{
     id: number;
     changesMade: boolean;
     createdByAccountId: number;
+    published: boolean;
 }
 
 export interface IQuestion{
