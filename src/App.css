@@ -77,6 +77,10 @@ a:hover {
   width: 35%;
 }
 
+.create-account-btn {
+  width:100%;
+}
+
 @media (min-width: 576px) {
   .question-builder{
     padding: 2rem;
@@ -93,6 +97,10 @@ a:hover {
 
   .delete-ans{
     padding:0 !important;
+  }
+
+  .create-account-btn {
+    width:75%;
   }
 }
 
@@ -204,7 +212,7 @@ a:hover {
     width:70%;
     justify-self: center;
   }
-  
+
   .save-delete-survey-btn {
     width: 43%;
   }
@@ -216,7 +224,9 @@ a:hover {
     padding-right: 3em;
   } 
 
-
+  .create-account-btn {
+    width:60%;
+  }
 }
 
 @media (min-width: 1700px) {

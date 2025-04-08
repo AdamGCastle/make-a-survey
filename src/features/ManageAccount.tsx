@@ -491,12 +491,14 @@ const ManageAccount: FunctionComponent<ManageAccountProps> = ({ onClose, mode })
           }   
 
           {isCreateMode && (
+            <div className="justify-content-center">
             <button 
-              className="btn custom-blue-btn" 
+              className="btn custom-green-btn create-account-btn" 
               onClick={handleCreateAccountClicked} 
               disabled={isLoading || passwordsDontMatch || accountDto.username === '' || confirmPassword === ''}>
                 Create account
               </button>
+            </div>
           )}
 
           {isLoading && <div className="d-flex justify-content-center mt-3">
