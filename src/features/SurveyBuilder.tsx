@@ -55,7 +55,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
 
         if(confirmWithUser){
             showDialogue({
-                title: 'Delete Question',
+                title: 'Delete question',
                 message: 'Are you sure want to delete this question?',
                 isQuestion: true,
                 onOkNavigationRoute: '',
@@ -109,6 +109,7 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
     }
  
     const submitSurvey = async () => {
+        setIsLoading(true);
         const surveyDto = structuredClone(survey);
 
         for (const question of surveyDto.questions){
@@ -171,7 +172,6 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                 return;
             }
 
-            setIsLoading(false);
             showDialogue({
                 title: 'Success',
                 message: `Survey ${controllerAction.toLocaleLowerCase()}d!`,
@@ -190,12 +190,10 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                 message: errorMessage,
                 isQuestion: false,
                 onOkNavigationRoute: ''
-            });
-
+            });            
+        } finally{
             setIsLoading(false);
         }
-
-        setIsLoading(false);
     }
 
     const onBackClicked = () => {
@@ -218,8 +216,8 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
 
     const onDeleteClicked = async () => {
         showDialogue({
-            title: 'Delete Survey?',
-            message: `Are you sure you want to delete "${survey.name}"?`,
+            title: 'Delete survey?',
+            message: `Are you sure you want to delete "${survey.name}"? This change cannot be undone.`,
             isQuestion: true,
             onOkNavigationRoute: '',
             onConfirm: async () => {
@@ -242,6 +240,8 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
                 } catch (error: any) {
                     setDeleteError(error.message);
                     setDeleteSuccess(false);
+                } finally{
+                    setIsLoading(false)
                 }
             }            
         });
@@ -265,97 +265,97 @@ const SurveyBuilder: FunctionComponent<SurveyBuilderProps> = ({initialSurveyValu
             return;
         }
 
-        if (deleteSuccess) {                
-            showDialogue({
-                title: 'Success!',
-                message: 'Survey deleted.',
-                isQuestion: false,
-                onOkNavigationRoute: '/',
-                onConfirm: () => {
-                    navigate('/');
-                }
-            });
+        setDeleteSuccess(undefined);
 
-            return;
-        } 
-        
         showDialogue({
-            title: 'Error',
-            message: `Failed to delete survey. ${deleteError}`,
+            title: deleteSuccess ? 'Success!' : 'Error',
+            message: deleteSuccess ? 'Survey deleted.': `Failed to delete survey. ${deleteError}`,
             isQuestion: false,
-            onOkNavigationRoute: ''
-        });
+            onOkNavigationRoute: deleteSuccess ? '/' : ''
+        });       
     }, [deleteSuccess, deleteError, navigate, showDialogue, survey.id]);
 
     return (        
         <div>
-            {!isLoading && <div>
-                <div className="survey-builder row text-center justify-content-center m-2">
-                    <div className="col col-xl-10">
+            <div className="survey-builder row text-center justify-content-center m-2">
+                <div className="col col-xl-10">
+                    <div className="row justify-content-center mt-3">
+                        <div className="col col-11 col-sm-10 col-md-9 col-lg-8"> 
+                            <textarea 
+                                id={`survey${survey.id}Name`}
+                                placeholder="Enter the name of your survey" 
+                                className="survey-title-textarea text-center text-dark-blue" 
+                                onChange={surveyNameChanged} 
+                                value={survey.name}
+                                rows={1}
+                            />
+                        </div>
+                    </div>
+                    {
+                        survey.questions.map((q, index) => (
+                            <QuestionBuilder
+                                key={q.key}
+                                questionNumber={index+1}
+                                onQuestionUpdated={(question: IQuestion) => onQuestionUpdated(question, index)}
+                                onRemoveQuestionClicked={() => onRemoveQuestionClicked(index)}
+                                initialQuestionValue={q}
+                            />
+                        ))
+                    }
+                    <div className="alignCentre">                     
+                        <button className="btn btn-sm custom-green-btn add-question-btn text-center mt-3" onClick={() => addQuestion()}>Add Question</button>                    
+                    </div>
+                    <div className="question-builder mt-4">
+                        <div className="row justify-content-center">
+                            <div className="col">
+                                <span className="text-dark-blue fw-bold">Is this survey ready for users to take?</span>
+                            </div>
+                        </div>
                         <div className="row justify-content-center mt-3">
-                            <div className="col col-11 col-sm-10 col-md-9 col-lg-8"> 
-                                <textarea 
-                                    id={`survey${survey.id}Name`}
-                                    placeholder="Enter the name of your survey" 
-                                    className="survey-title-textarea text-center text-dark-blue" 
-                                    onChange={surveyNameChanged} 
-                                    value={survey.name}
-                                    rows={1}
-                                />
+                            <div className="col">
+                            <div className="btn-group mt-3 w-50" role="group">
+                                    <button
+                                        type="button"
+                                        className={`btn ${survey.published ? "custom-blue-btn blue-btn-selected" : "outline-custom-blue-btn"} btn-sm w-50`}
+                                        onClick={() => publishStatusChanged(true)}
+                                        >Yes
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className={`btn ${!survey.published ? "custom-blue-btn blue-btn-selected" : "outline-custom-blue-btn"} btn-sm w-50`}
+                                        onClick={() => publishStatusChanged(false)}
+                                        >No
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        {
-                            survey.questions.map((q, index) => (
-                                <QuestionBuilder
-                                    key={q.key}
-                                    questionNumber={index+1}
-                                    onQuestionUpdated={(question: IQuestion) => onQuestionUpdated(question, index)}
-                                    onRemoveQuestionClicked={() => onRemoveQuestionClicked(index)}
-                                    initialQuestionValue={q}
-                                />
-                            ))
+                    </div>
+                    <br/>
+                    <div className="alignCentre mb-2">
+                        <button 
+                            className="btn custom-dark-blue-btn btn-sm mx-3 save-delete-survey-btn" 
+                            onClick={() => submitSurvey()}
+                            disabled={isLoading}>Save Survey
+                        </button>
+                        {survey.id > 0 && 
+                            <button 
+                                className="btn btn-danger btn-sm mx-3 save-delete-survey-btn" 
+                                onClick={() => onDeleteClicked()}
+                                disabled={isLoading}>Delete Survey                                
+                            </button>
                         }
-                        <div className="alignCentre">                     
-                            <button className="btn btn-sm custom-green-btn add-question-btn text-center mt-3" onClick={() => addQuestion()}>Add Question</button>                    
-                        </div>
-                        <div className="question-builder mt-4">
-                            <div className="row justify-content-center">
-                                <div className="col">
-                                    <span className="text-dark-blue fw-bold">Is this survey ready for users to take?</span>
-                                </div>
-                            </div>
-                            <div className="row justify-content-center mt-3">
-                                <div className="col">
-                                <div className="btn-group mt-3 w-50" role="group">
-                                        <button
-                                            type="button"
-                                            className={`btn ${survey.published ? "custom-blue-btn blue-btn-selected" : "outline-custom-blue-btn"} btn-sm w-50`}
-                                            onClick={() => publishStatusChanged(true)}
-                                            >Yes
-                                        </button>
-                                        <button
-                                            type="button"
-                                            className={`btn ${!survey.published ? "custom-blue-btn blue-btn-selected" : "outline-custom-blue-btn"} btn-sm w-50`}
-                                            onClick={() => publishStatusChanged(false)}
-                                            >No
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br/>
-                        <div className="alignCentre mb-2">
-                            <button className="btn custom-dark-blue-btn btn-sm mx-3 save-delete-survey-btn" onClick={() => submitSurvey()}>Save Survey</button>
-                            {survey.id > 0 && <button className="btn btn-danger btn-sm mx-3 save-delete-survey-btn" onClick={() => onDeleteClicked()}>Delete Survey</button>}
-                        </div>  
-                    </div>                         
-                </div>                  
-            </div>}
-            {isLoading &&<div>
-                <p>Loading...</p>
-            </div>}
+                    </div>
+                    {isLoading && <div className="spinner-border text-primary mt-3" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>} 
+                </div>
+            </div>
             <div className="d-flex justify-content-center">
-                <button onClick={onBackClicked} className='btn btn-light btn-sm my-3 w-25'>Back</button>  
+                <button 
+                    onClick={onBackClicked} 
+                    className='btn btn-light btn-sm my-3 w-25'
+                    disabled={isLoading}>Back
+                </button>  
             </div>
         </div>        
     )

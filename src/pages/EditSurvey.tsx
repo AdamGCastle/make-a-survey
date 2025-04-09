@@ -73,13 +73,13 @@ const EditSurvey: FunctionComponent = () => {
             </div>
             
             <br/>
-            {isLoading && 
+            {isLoading &&
                 <div className="row justify-content-center">
                     <div className="col col-sm-8 col-md-6 d-flex justify-content-center mx-2">
                         <div className="card p-3 w-100 d-inline-block text-center">
                             <div className="row mb-3">
                                 <div className="col">
-                                 <h3><strong>{surveyName}</strong></h3>
+                                 <h2 className="fw-bold">{surveyName}</h2>
                                 </div >
                             </div>
                             <div className="row mb-3">
@@ -98,12 +98,17 @@ const EditSurvey: FunctionComponent = () => {
             <div className="row justify-content-center">
                 <div className="col col-sm-8 col-md-6 mx-2">
                     <div className="card text-center p-3 w-auto d-inline-block">
-                        <p>{'Something went wrong trying to get the survey you wanted to edit.'}</p>
-                        <Link to='/'>
-                        <button className='btn btn-secondary btn-sm me-3'>Back</button>
-                        </Link>
+                        <p>{'Something went wrong trying to get the survey you wanted to edit.'}</p>                        
                     </div>
                 </div>
+            </div>
+            }
+            {isLoading && <div className="row justify-content-center my-3">
+                <div className="col text-center">
+                    <Link to='/'>
+                        <button className='btn btn-light btn-sm my-3 w-25'>Back</button>
+                    </Link>
+                </div>                
             </div>
             }
         </div>
