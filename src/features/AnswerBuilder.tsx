@@ -48,7 +48,7 @@ const AnswerBuilder: FunctionComponent<AnswerBuilderProps> = ({ answerNumber, on
                     onChange={answerTextChanged} 
                 />
             </div>
-            <div className="col col-12 col-sm-1 delete-ans">
+            <div className="col col-12 col-sm-1 delete-ans mt-2">
                 <button className="btn btn-sm btn-danger bi bi-trash" 
                     onClick={() => removeAnswer(myAnswer.id)}></button>
             </div>
